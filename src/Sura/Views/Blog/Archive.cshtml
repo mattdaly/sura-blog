@@ -1,0 +1,57 @@
+﻿@using Sura.Views.Blog.Models
+@model IEnumerable<List>
+@{
+    var title = "Archive: ";
+    
+    if(ViewBag.Day != null)
+    {
+        title += ViewBag.Day + "/";
+    } 
+    if(ViewBag.Month != null)
+    {
+        title += ViewBag.Month + "/";
+    } 
+    
+    ViewBag.Title = title + ViewBag.Year + "(" + Model.Count() + " posts)";
+
+}
+<section class="twelve columns">
+<h2>Archive: @if(ViewBag.Day != null) { @ViewBag.Day @Html.Raw("/"); } @if(ViewBag.Month != null) { @ViewBag.Month; @Html.Raw("/"); } @ViewBag.Year (@Model.Count() posts)</h2>
+
+@foreach (var post in Model)
+{
+     <article class="panel">
+        <header class="row">
+            <h3 class="nine columns"><a href="@Url.Action("Post", "Blog", new { slug = @post.Slug })">@post.Title</a></h3>
+            <time datetime="11-11-2011" pubdate  class="three columns">@Html.Published(@post.PublishedAt)</time>
+        </header>
+
+        <div id="article-content" class="row">
+            @post.Content
+        </div>
+
+        <footer class="row">
+            <ul class="tags nine columns">
+                <li>Tags: </li>
+                @foreach (var tag in post.Tags)
+                {
+                <li><a href="@Url.Action("Tag", "Blog", new { @tag })">@tag</a></li>               
+                }
+            </ul> 
+            <a href="@Url.Action("Post", "Blog", new { slug = @post.Slug })#comments" class="three columns comments">
+            @if (post.EnableComments)
+            {
+                if (post.Comments == 0)
+                {
+                    <p class="comments">No comments</p>
+                }
+                else
+                {
+                    <p class="comments">Comments (@post.Comments)</p>
+                }
+
+            }</a>
+        </footer>
+    </article>
+}
+</section>

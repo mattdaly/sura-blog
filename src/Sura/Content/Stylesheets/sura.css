@@ -1,0 +1,133 @@
+::selection {
+	background: #00a6fc; /* Safari */
+    color: #fff;
+	}
+::-moz-selection {
+	background: #00a6fc; /* Firefox */
+    color: #fff;
+}
+
+body { background: #fff; font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif; font-size: 13px; line-height: 18px; color: #555; position: relative; -webkit-font-smoothing: antialiased; }
+
+header#head 
+{
+    position: relative;
+}
+
+header#head h1
+{   
+    font-family: 'Chewy', cursive;
+    line-height: 100px;
+    margin: 0;
+    padding-left: 12px;
+    position: relative;
+}
+
+nav#menu 
+{
+    background: #eee;
+    border-radius: 8px;
+    box-shadow: inset 3px 3px 3px #ddd;
+    color: #000;
+    width: 110%;
+}
+
+nav#menu ul
+{
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 0;
+    margin-left: 1em;
+}
+
+nav#menu li a
+{
+    color: #000;
+}
+
+nav#menu li a:hover
+{
+    color: crimson;
+}
+
+footer#foot
+{
+    border-top: 1px solid #ddd;
+    margin-bottom: 1.65em;
+}
+
+div.row.main .twelve.columns
+{
+    margin-left: 1%;
+    padding-top: 10px;
+    position: relative;
+    width: 98%;
+}
+
+article header
+{
+    border-bottom: 1px solid #eee;
+}
+
+time
+{    
+    text-align: right;
+}
+
+article .article-content
+{
+    margin-top: 1em;
+}
+
+article footer
+{
+    border-top: 1px solid #ddd;
+    padding-top: 1em;
+}
+
+article ul.tags
+{
+    margin-bottom: 0;
+}
+
+article ul.tags li
+{
+    clear: none;
+    display: inline-block;
+    float: left;
+}
+
+article ul.tags li
+{
+    clear: none;
+    display: inline-block;
+    float: left;
+    margin-right: 5px;
+}
+
+article ul.tags li:after
+{
+    content: ','
+}
+
+article ul.tags li:first-child:after, article ul.tags li:last-child:after
+{
+    content: ''
+}
+
+article .comments
+{
+    text-align: right;
+}
+
+textarea.body
+{
+    height: 200px;
+    width: 70%;
+}
+
+div.validation-summary-errors li
+{
+    padding: 6px 7px; font-weight: bold; font-size: 13px; background: #eee; border: 1px solid rgba(0,0,0,0.1); margin-bottom: 12px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; text-shadow: 0 1px rgba(255,255,255,0.9); 
+	background-color: #c00000; color: #fff; text-shadow: 0 -1px rgba(0,0,0,0.3);
+}

@@ -1,0 +1,51 @@
+﻿@using Sura.Areas.Admin.Helpers
+@using Sura.Areas.Admin.Views.Users.Models
+@model Create
+@{
+    ViewBag.Title = "New User";
+}
+
+<section class="twelve columns">
+<h3>New User</h3>
+
+<dl class="sub-nav not-tabbed">
+  <dt>Filter:</dt>
+  <dd class="active">@Html.ActionLink("New User", "Create", "Users")</dd>
+  <dd>@Html.ActionLink("List", "List", "Users")</dd>
+</dl>
+
+@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+{
+  
+    @Html.ValidationSummary()
+
+
+    <fieldset>
+        <h5>Create User</h5>
+        
+        @Html.LabelFor(model => model.Username)
+        @Html.TextBoxFor(model => model.Username, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.Password)
+        @Html.TextBoxFor(model => model.Password, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.PasswordRetype)
+        @Html.TextBoxFor(model => model.PasswordRetype, new { @class = "input-text" })
+    </fieldset>    
+    
+    <fieldset>
+        <h5>Personal Information</h5>
+
+        @Html.LabelFor(model => model.Firstname)
+        @Html.TextBoxFor(model => model.Firstname, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.Surname)
+        @Html.TextBoxFor(model => model.Surname, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.Nickname)
+        @Html.TextBoxFor(model => model.Nickname, new { @class = "input-text" })
+    </fieldset>  
+  
+    <input type="submit" value="Save New User" class="nice radius blue button" />
+}
+</section>

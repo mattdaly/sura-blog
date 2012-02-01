@@ -1,0 +1,23 @@
+﻿@model Sura.Areas.Admin.Views.Dashboard.Models.User
+@{
+    ViewBag.Title = "Dashboard";
+
+    var name = Model.Username;
+
+    if (!string.IsNullOrEmpty(Model.Nickname))
+    {
+        name = Model.Nickname;
+    }
+    else if (!string.IsNullOrEmpty(Model.Firstname))
+    {
+        name = Model.Firstname;
+        if (!string.IsNullOrEmpty(Model.Surname))
+        {
+            name += Model.Surname;
+        }
+    }
+}
+<section class="twelve columns">
+    <h3>Dashboard</h3>
+    <p>Hello, @name. You last logged in at @Model.LastLoginAt.Value.ToString("HH:MM tt on dddd, MMMM dd, yyyy")</p>
+</section>

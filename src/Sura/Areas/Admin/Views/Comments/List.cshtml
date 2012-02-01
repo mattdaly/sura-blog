@@ -1,0 +1,118 @@
+﻿@using Sura.Areas.Admin.Views.Comments.Models
+@model IEnumerable<List>
+@{
+    ViewBag.Title = "Comments";
+    var unapproved = Model.Where(x => x.Approved == false).Count();
+}
+<section class="twelve columns">
+<h3>Comments</h3>
+
+<ul>
+@if (ViewBag.AllowComments == false)
+{
+    <li>- Comments are currently disabled throughout the blog. @Html.ActionLink("Change this setting", "Edit", "Settings")</li>
+}
+
+@if (ViewBag.CommentsRequireApproval == false)
+{
+    <li>- Comments are not currently moderated. New comments will viewable to the public. @Html.ActionLink("Change this setting", "Edit", "Settings")</li>
+}
+</ul>
+
+<dl class="sub-nav tabbed">
+  <dt>Filter:</dt>
+  <dd class="active"><a href="#unapproved">Awaiting Moderation 
+  @if (unapproved > 0)
+  {
+      @:(@unapproved)
+  }
+  </a></dd>
+  <dd><a href="#approved">Approved</a></dd>
+</dl>
+
+<ul class="tabs-content">
+    <li class="active" id="unapprovedTab">
+        <table>
+            <thead>
+                <tr>
+                    <th>Post</th>
+                    <th>Post Published At</th>
+                    <th>Author</th>
+                    <th>Email</th>
+                    <th>Comment</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+            <tbody> @foreach (var comment in Model.Where(x => x.Approved == false).OrderBy(x => x.WrittenAt).OrderBy(x => x.PostPublishedAt))
+                    {
+                 <tr>
+                    <td>@Html.ActionLink(@comment.PostTitle, "Post", "Blog", new { slug = @comment.PostSlug }, null)</td>
+                    <td>@comment.PostPublishedAt.ToString("dd/MM/yy HH:mm")</td>
+                    @if (string.IsNullOrWhiteSpace(comment.Url) == false)
+                    {
+                         <td><a href="@comment.Url">@comment.Name</a></td>
+                    }
+                    else
+                    {
+                        <td>@comment.Name</td>
+                    }            
+                    <td>@comment.Email</td>
+                    <td>@comment.Body</td>
+                    <td>@comment.WrittenAt</td>
+                    <td>@Ajax.ActionLink("Approve", "Approve", "Comments", new { slug = comment.PostSlug, commentId = comment.CommentId }, 
+                                new AjaxOptions {
+                                                    HttpMethod = "POST",
+                                                    Confirm = "Are you sure you want to approve this comment?",
+                                                    OnSuccess = "redirect('" + @Url.Action("List", "Comments") + "')"
+                                                })
+                    </td>
+                    <td>@Ajax.ActionLink("Reject", "Reject", "Comments", new { slug = comment.PostSlug, commentId = comment.CommentId }, 
+                                new AjaxOptions {
+                                                    HttpMethod = "DELETE",
+                                                    Confirm = "Are you sure you want to reject this comment? It will be permanently deleted.",
+                                                    OnSuccess = "redirect('" + @Url.Action("List", "Comments") + "')"
+                                                })
+                    </td>
+                </tr> }
+            </tbody>            
+        </table>    
+    </li>
+    <li id="approvedTab">
+        <table>
+            <thead>
+                <tr>
+                    <th>Post</th>
+                    <th>Post Published At</th>
+                    <th>Author</th>
+                    <th>Comment</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+            <tbody> @foreach (var comment in Model.Where(x => x.Approved).OrderBy(x => x.WrittenAt).OrderBy(x => x.PostPublishedAt))
+                    {
+                 <tr>
+                    <td>@Html.ActionLink(@comment.PostTitle, "Post", "Blog", new { slug = @comment.PostSlug }, null)</td>
+                    <td>@comment.PostPublishedAt.ToString("dd/MM/yy HH:mm")</td>
+                    @if (string.IsNullOrWhiteSpace(comment.Url) == false)
+                    {
+                         <td><a href="@comment.Url">@comment.Name</a></td>
+                    }
+                    else
+                    {
+                        <td>@comment.Name</td>
+                    }
+                    <td>@comment.Body</td>
+                    <td>@comment.WrittenAt</td>
+                    <td>@Ajax.ActionLink("Delete", "Delete", "Comments", new { slug = comment.PostSlug, commentId = comment.CommentId }, 
+                                new AjaxOptions {
+                                                    HttpMethod = "DELETE",
+                                                    Confirm = "Are you sure you want to permanently delete this comment?",
+                                                    OnSuccess = "redirect('" + @Url.Action("List", "Comments") + "')"
+                                                })
+                    </td>
+                </tr> }
+            </tbody>            
+        </table>     
+    </li>   
+</ul>
+</section>

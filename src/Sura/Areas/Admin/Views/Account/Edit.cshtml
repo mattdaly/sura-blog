@@ -1,0 +1,41 @@
+﻿@using Sura.Areas.Admin.Views.Account.Models
+@model Edit
+@{
+    ViewBag.Title = "Edit Account";
+}
+<section class="twelve columns">
+    <h3>Account</h3>
+@using (Html.BeginForm("Update", "Account", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+{
+    @Html.ValidationSummary() 
+
+    <fieldset>
+        <h5>Personal Information</h5>
+        @Html.HiddenFor(model => model.Id)
+
+        @Html.LabelFor(model => model.Firstname)
+        @Html.TextBoxFor(model => model.Firstname, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.Surname)
+        @Html.TextBoxFor(model => model.Surname, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.Nickname)
+        @Html.TextBoxFor(model => model.Nickname, new { @class = "input-text" })
+    </fieldset>    
+    
+    <fieldset>
+        <h5>Change Password</h5>
+                
+        @Html.LabelFor(model => model.Password)
+        @Html.TextBoxFor(model => model.Password, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.NewPassword)
+        @Html.TextBoxFor(model => model.NewPassword, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.NewPasswordRetype)
+        @Html.TextBoxFor(model => model.NewPasswordRetype, new { @class = "input-text" })
+    </fieldset>  
+    
+    <input type="submit" value="Update Account" class="nice radius blue button" />
+}
+</section>

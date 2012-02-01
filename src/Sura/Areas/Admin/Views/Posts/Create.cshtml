@@ -1,0 +1,88 @@
+﻿@using Sura.Areas.Admin.Helpers
+@using Sura.Areas.Admin.Infrastructure
+@using Sura.Areas.Admin.Views.Posts.Models
+@model Create
+@{
+    ViewBag.Title = "New Post";
+}
+@section stylesheets
+{
+    <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/Sura/sura-admin-posts.css")" />
+}
+@section javascripts 
+{
+    <script src="@Url.Content("~/Content/Javascripts/Sura/sura-admin-posts.min.js")"></script>
+    @{
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#Tags').tagInput();
+                
+                var scheduler = $('span#schedule-datetimepicker').hide();
+                $('#ScheduleFor').datetimepicker({
+                    showOn: 'button',
+                    buttonImage: '@Url.Content("~/Content/Images/Sura/scheduler/calendar.gif")',
+                    buttonImageOnly: true,
+                    dateFormat: 'dd/mm/yy',
+                    minDate: new Date()
+                });
+
+                $('#Availability').change(function () {
+                    if ($(this).val() == '@Availability.Scheduled') {
+                        scheduler.show();
+                        $('.ui-datepicker-trigger').click();
+                    }
+                    else {
+                        scheduler.hide();
+                    }
+                });
+            });
+        </script>
+      }
+}
+
+<section class="twelve columns">
+<h3>New Post</h3>
+
+@using (Html.BeginForm("Create", "Posts", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+{
+    @Html.ValidationSummary() 
+            
+    <fieldset>
+        <h5>Content</h5>
+        
+        @Html.LabelFor(model => model.Title)
+        @Html.TextBoxFor(model => model.Title, new { @class = "input-text" })     
+
+        @Html.LabelFor(model => model.Tags)
+        @Html.TextBoxFor(model => model.Tags, new { @class = "input-text", placeholder = "Type a tag name" })
+
+        @Html.LabelFor(model => model.Body)
+        @Html.TextAreaFor(model => model.Body, new { @class = "body"})
+    </fieldset>    
+    
+    <fieldset>
+        <h5>SEO</h5>
+   
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @class = "description" })
+    </fieldset>    
+     
+    
+    <fieldset>
+        <h5>Settings</h5>
+                
+        @Html.LabelFor(model => model.Availability)
+        @Html.EnumDropDownListFor(model => model.Availability)
+
+        <span id="schedule-datetimepicker">
+            <label for="ScheduleFor">Select a time and date:</label>
+            <input id="ScheduleFor" name="ScheduleFor" type="text" value="" readonly="readonly" />
+        </span>
+        
+        @Html.LabelFor(model => model.EnableComments)
+        @Html.EnumDropDownListFor(model => model.EnableComments)
+    </fieldset>
+    
+    <input type="submit" value="Save New Post" class="nice radius blue button" />
+} 
+</section>

@@ -1,0 +1,26 @@
+@using Sura.Views.Blog.Models
+@model Comment
+
+@using (Html.BeginForm("Comment", "Blog", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+{
+    @Html.ValidationSummary()
+    <fieldset>
+        <h5>Post A Comment</h5>
+
+        @Html.HiddenFor(model => model.PostId)
+
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email, new { @class = "input-text" })
+
+        @Html.LabelFor(model => model.Url)
+        <input id="Url" name="Url" type="url" value="" class="input-text" />
+
+        @Html.LabelFor(model => model.Body)
+        @Html.TextAreaFor(model => model.Body, new { @class = "body" })
+
+        <input type="submit" value="Post Comment"  class="nice radius blue button" />
+    </fieldset>
+}

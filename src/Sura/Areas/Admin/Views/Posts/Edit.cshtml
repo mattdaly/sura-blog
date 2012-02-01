@@ -1,0 +1,129 @@
+﻿@using Sura.Areas.Admin.Helpers
+@using Sura.Areas.Admin.Infrastructure
+@using Sura.Areas.Admin.Views.Posts.Models
+@model Edit
+@{
+    ViewBag.Title = "New Post";
+}
+@section stylesheets
+{
+    <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/Sura/sura-admin-posts.css")" />
+}
+@section javascripts 
+{
+    <script src="@Url.Content("~/Content/Javascripts/Sura/sura-admin-posts.min.js")"></script>
+    @{
+        <script type="text/javascript">
+            $(document).ready(function () {         
+                $('#Tags').tagInput();
+                
+                var scheduler = $('span#schedule-datetimepicker').hide();
+                $('#ScheduleFor').datetimepicker({
+                    showOn: 'button',
+                    buttonImage: '@Url.Content("~/Content/Images/Sura/scheduler/calendar.gif")',
+                    buttonImageOnly: true,
+                    dateFormat: 'dd/mm/yy',
+                    minDate: new Date()
+                });
+                
+                @if (Model.Availability == Availability.Scheduled)
+                {
+                    @:scheduler.show();
+                }                
+
+                $('#Availability').change(function () {
+                    if ($(this).val() == '@Availability.Scheduled') {
+                        scheduler.show();
+                        $('.ui-datepicker-trigger').click();
+                    }
+                    else {
+                        scheduler.hide();
+                    }
+                });
+            });
+        </script>
+      }
+}
+
+<section class="twelve columns">
+<h3>Edit - '@Model.Title'</h3>
+
+@if (@ViewBag.Success == true)
+{
+<div class="alert-box success ">
+	The post was successfully updated.
+	<a href="" class="close">&times;</a>
+</div>
+}
+
+@using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+{
+    @Html.ValidationSummary() 
+    <fieldset>
+        <h5>Content</h5>
+        
+        @Html.LabelFor(model => model.Title)
+        @Html.TextBoxFor(model => model.Title, new { @class = "input-text" })     
+
+        @Html.LabelFor(model => model.Tags)
+        @Html.TextBoxFor(model => model.Tags, new { @class = "input-text", placeholder = "Type a tag name" })
+
+        @Html.LabelFor(model => model.Body)
+        @Html.TextAreaFor(model => model.Body, new { @class = "body" })
+    </fieldset>     
+    
+    <fieldset>
+        <h5>SEO</h5>   
+
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @class = "description" })
+    </fieldset>    
+    
+    <fieldset>
+        <h5>Settings</h5>
+
+        @Html.HiddenFor(model => model.Id)
+              
+        <label for="Availability">
+            <span>Availability</span>
+            @Html.EnumDropDownListFor(model => model.Availability)
+            <span id="schedule-datetimepicker">
+                <label for="ScheduleFor">Select a time and date:</label>
+                <input id="ScheduleFor" name="ScheduleFor" type="text" value="@Model.ScheduleFor" readonly="readonly" />
+            </span>
+        </label>                          
+        
+
+
+        @Html.LabelFor(model => model.EnableComments)
+        @Html.EnumDropDownListFor(model => model.EnableComments)
+    </fieldset>
+    
+    
+    <input type="submit" value="Update Post" class="nice radius blue button" /> 
+} 
+
+<span class="sub-buttons">
+@if (Model.IsTrashed)
+{
+    @:<p>This post is currently in the trash, saving it will remove it from the trash and place it according to the 'availability' selection above.</p>
+}
+else
+{
+    @Ajax.ActionLink("Trash", "Trash", new { slug = @Model.Slug }, new AjaxOptions
+    {
+        HttpMethod = "POST",
+        Confirm = "Are you sure you want to trash this post?",
+        OnSuccess = "redirect('" + @UrlHelper.GenerateUrl(null, "List", "Posts", null, null, "trashed",
+            null, Url.RouteCollection, Url.RequestContext, false ) + "')"
+    }, new { @class = "nice small radius black button" })
+} 
+@Ajax.ActionLink("Permanently Delete", "Delete", new { slug = @Model.Slug }, new AjaxOptions
+{
+    HttpMethod = "DELETE",
+    Confirm = "Are you sure you want to delete this post? It will not be retrievable.",
+    OnSuccess = "redirect('" + @Url.Action("List", "Posts") + "')"
+}, new { @class = "nice small radius red button" })
+</span>
+
+</section>

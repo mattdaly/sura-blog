@@ -1,0 +1,59 @@
+﻿@using Sura.Areas.Admin.Helpers
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Sura - @ViewBag.Title</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/foundation.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/Sura/sura-admin.css")" />
+    @RenderSection("stylesheets", false)
+
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/ie.css")" />
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+<div class="container">
+    <header id="head" class="row">
+        <h1 class="eight columns">@Html.RouteLink("Sura", "Blog") <span>Blog Administration</span></h1>
+    </header>
+
+    @if (Request.IsAuthenticated)
+    {
+        <nav id="menu" class="row">
+            <ul class="nine columns">
+                <li class="nav-dashboard">@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                <li class="nav-posts/new">@Html.ActionLink("New Post", "Create", "Posts")</li>
+                <li class="nav-posts">@Html.ActionLink("Posts", "List", "Posts")</li>
+                <li class="nav-comments">@Html.ActionLink("Comments", "List", "Comments")</li>
+                <li class="nav-users">@Html.ActionLink("Users", "List", "Users")</li>
+                <li class="nav-settings">@Html.ActionLink("Settings", "Edit", "Settings")</li>
+                <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+            </ul>
+            <span class="two columns user">
+                @Html.User()
+            </span>
+        </nav>
+    }
+    <div class="row main">
+        @RenderBody()
+    </div>
+    <footer id="foot" class="row">
+    </footer>
+</div>
+
+	<script src="@Url.Content("~/Content/Javascripts/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Content/Javascripts/modernizr.foundation.js")"></script>
+	<script src="@Url.Content("~/Content/Javascripts/jquery.validate.min.js")"></script>
+	<script src="@Url.Content("~/Content/Javascripts/jquery.validate.unobtrusive.min.js")"></script>
+	<script src="@Url.Content("~/Content/Javascripts/jquery.unobtrusive-ajax.min.js")"></script>
+	<script src="@Url.Content("~/Content/Javascripts/Sura/sura-admin.js")"></script>
+    @RenderSection("javascripts", false)
+</body>
+</html>

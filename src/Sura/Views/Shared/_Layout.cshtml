@@ -1,0 +1,42 @@
+﻿<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/foundation.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/sura.css")" />
+
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/ie.css")" />
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+<div class="container">
+    <header id="head" class="row">
+        <h1 class="eight columns">@Html.RouteLink("Sura", "Blog")</h1>
+    </header>
+
+    <nav id="menu" class="row">
+        <ul class="nine columns">
+            <li>@Html.ActionLink("Home", "List", "Blog")</li>
+        </ul>
+    </nav>
+    
+    <div class="row main">
+        @RenderBody()
+    </div>
+
+    <footer id="foot" class="row">
+    </footer>
+</div>
+	<script src="@Url.Content("~/Content/Javascripts/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Content/Javascripts/modernizr.foundation.js")"></script>
+	<script src="@Url.Content("~/Content/Javascripts/jquery.validate.min.js")"></script>
+	<script src="@Url.Content("~/Content/Javascripts/jquery.validate.unobtrusive.min.js")"></script>
+</body>
+</html>

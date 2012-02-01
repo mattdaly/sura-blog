@@ -1,0 +1,23 @@
+﻿@using Sura.Areas.Admin.Views.Account.Models
+@model Login
+@{
+    ViewBag.Title = "Login";
+}
+<section class="twelve columns">  
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "nice" }))  
+{
+    <div class="login panel">
+        <h3>Login</h3>
+
+        @Html.ValidationSummary()
+
+        @Html.LabelFor(model => model.Username)
+        @Html.TextBoxFor(model => model.Username, new { @class = "input-text" })
+        
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password, new { @class = "input-text" })
+
+        <input type="submit" value="Login" class="nice small radius blue button" />        
+    </div>
+}
+</section>

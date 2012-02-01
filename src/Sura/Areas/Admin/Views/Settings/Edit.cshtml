@@ -1,0 +1,50 @@
+﻿@model Sura.Areas.Admin.Views.Settings.Models.Edit
+@{
+    ViewBag.Title = "Edit Blog Settings";
+}
+
+<section class="twelve columns">
+    <h3>Edit Blog Settings</h3>
+
+@if (@ViewBag.Success == true)
+{
+    <div class="alert-box success ">
+        The blog settings were successfully updated.
+        <a href="" class="close">&times;</a>
+    </div>
+}
+
+@using (Html.BeginForm("Edit", "Settings", FormMethod.Post, new { @class = "nice" }))
+{
+    @Html.ValidationSummary()
+    @Html.HiddenFor(model => model.Id)
+
+    <fieldset>
+        <h5>Users</h5>
+        
+        <label for="KeepUsersOnlineFor" class="mins">
+            <span>Keep Logged In Users Online For: </span>
+            @Html.TextBoxFor(model => model.KeepUsersOnlineFor, new { @class = "input-text" }) <span>minutes</span>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <h5>Comments</h5>        
+        
+        <label for="EnableComments">
+            <span>Enable Comments: </span>
+            @Html.RadioButtonFor(model => model.EnableComments, true) Yes
+            @Html.RadioButtonFor(model => model.EnableComments, false) No
+        </label>
+
+        <label for="CommentsRequireApproval">
+            <span>New Comments Require Moderation: </span>
+            @Html.RadioButtonFor(model => model.CommentsRequireApproval, true) Yes
+            @Html.RadioButtonFor(model => model.CommentsRequireApproval, false) No
+        </label>
+    </fieldset>
+    
+    <input type="submit" value="Update Settings" class="nice radius blue button" />
+}
+
+</section>

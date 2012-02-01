@@ -1,0 +1,39 @@
+﻿@using Sura.Views.Blog.Models
+@model IEnumerable<List>
+@{
+    ViewBag.Title = "Blog";
+}
+<section class="twelve columns">
+@foreach (var post in Model)
+{
+     <article class="panel">
+        <header class="row">
+            <h3 class="nine columns"><a href="@Url.Action("Post", "Blog", new { slug = @post.Slug })">@post.Title</a></h3>
+            <time datetime="@post.PublishedAt.Value.ToString("yyyy-MM-dd")" pubdate class="three columns">@Html.Published(@post.PublishedAt)</time>
+        </header>
+
+        <div class="article-content row">
+            @post.Content
+        </div>
+
+        <footer class="row">
+            <ul class="tags nine columns">
+                <li>Tags: </li>
+                @foreach (var tag in post.Tags)
+                {
+                <li><a href="@Url.Action("Tag", "Blog", new { @tag })">@tag</a></li>               
+                }
+            </ul> 
+            <a href="@Url.Action("Post", "Blog", new { slug = @post.Slug })#comments" class="three columns comments">
+            @if (post.EnableComments && post.Comments > 0)
+            {
+                <p class="comments">Comments (@post.Comments)</p>
+            }
+            else
+            {
+                <p class="comments">No comments</p>
+            }</a>
+        </footer>
+    </article>
+}
+</section>
