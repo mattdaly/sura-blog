@@ -54,7 +54,7 @@
         @Html.TextBoxFor(model => model.Title, new { @class = "input-text" })     
 
         @Html.LabelFor(model => model.Tags)
-        @Html.TextBoxFor(model => model.Tags, new { @class = "input-text", placeholder = "Type a tag name" })
+        @Html.TextBoxFor(model => model.Tags, new { @class = "input-text", placeholder = "Separate tags with commas" })
 
         @Html.LabelFor(model => model.Body)
         @Html.TextAreaFor(model => model.Body, new { @class = "body"})

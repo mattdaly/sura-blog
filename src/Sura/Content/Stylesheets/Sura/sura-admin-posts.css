@@ -137,15 +137,24 @@ span#schedule-datetimepicker input
 .ui-timepicker-div dl dd { margin: -25px 0 10px 65px; }
 .ui-timepicker-div td { font-size: 90%; padding-top: 5px; }
 
+div.post-tags
+{
+    float: left;
+    width: 100%;
+}
+
+div.post-tags input, div.post-tags ul
+{
+    clear: none;
+    float: left;
+}
 
 ul.taglist
 {
-    clear: right;
+    clear: none;
     color: #505050;
-    float: left;
-    margin: 0 0 0 0;
+    margin: 0 0 0 0.75em;
     padding: 0;
-    width: 99%;
 }
 
 ul.taglist li
@@ -153,11 +162,6 @@ ul.taglist li
     clear: none;
     display: inline-block;
     float: left;   
-}
-
-ul.taglist li:first-child
-{
-    font-weight: normal;
 }
 
 ul.taglist.focused
@@ -172,8 +176,8 @@ ul.taglist li.tag
     border-radius: 3px 3px 3px 3px;
     cursor: default;
     list-style: none;
-    line-height: 1.85em;
-    margin: 0 0.5em 0.5em 0;
+    line-height: 1.95em;
+    margin: 0.25em 0.75em 0.5em 0;
     padding: 0 1.35em 0 0.45em;
     position: relative;
     -webkit-user-select: none;
@@ -192,19 +196,20 @@ ul.taglist li.tag a.delete span
     visibility: hidden;
 }
 
-ul.taglist li.tag a.delete
+ul.taglist li.tag a.remove
 {
     background: url("../../Images/Sura/input-tag.png") 0 0 no-repeat;
     cursor: pointer;    
     height: 14px;
     position: absolute;
     right: 0.15em;
+    text-indent: -9999px;
     text-decoration: none;
     top: 0.47em;
     width: 16px;
 }
 
-ul.taglist li.tag a.delete:hover
+ul.taglist li.tag a.remove:hover
 {
     background: url("../../Images/Sura/input-tag.png") 0 -15px no-repeat;
 }
@@ -222,16 +227,14 @@ ul.taglist li input[type=text]
     font-size: 13px; 
     padding: 6px 3px 4px; 
     outline: none !important; 
-    background: url(../../Images/misc/input-bg.png) #fff;
     clear: none;
     color: black;
     cursor: text;
     line-height: 1.76em;
     float: left;    
     margin: 0 0 0 0.15em;
-    min-width: 11.6em;
     padding: 0.125em 0.4em;
-    width: 11.6em;
+    width: 
 }
 
 textarea.body
