@@ -36,13 +36,13 @@ namespace Sura.Areas.Admin.Controllers
         public ActionResult Create(Create model)
         {
             if (string.IsNullOrWhiteSpace(model.Username))
-                ModelState.AddModelError("Required", "You must enter a username.");
+                ModelState.AddModelError("Required", "The Username field is required.");
 
             if (string.IsNullOrWhiteSpace(model.Password))
-                ModelState.AddModelError("Required", "You must enter a password.");
+                ModelState.AddModelError("Required", "The Password field is required.");
 
             if (string.IsNullOrWhiteSpace(model.PasswordRetype))
-                ModelState.AddModelError("Required", "You must enter the password again.");
+                ModelState.AddModelError("Required", "The Password (Again) field is required.");
 
             if (ModelState.IsValid == false)
                 return View("Create", model);
