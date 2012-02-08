@@ -32,7 +32,7 @@ namespace Sura.Areas.Admin
             context.MapRoute("Admin_Posts_Delete", "admin/posts/{slug}/delete", new { controller = "Posts", action = "Delete" });
 
             // comments
-            context.MapRoute("Admin_Comments", "admin/comments", new { controller = "Comments", action = "List" });
+            context.MapRoute("Admin_Comments", "admin/comments", new { controller = "NumberOfComments", action = "List" });
 
             // settings
             context.MapRoute("Admin_Settings", "admin/settings", new { controller = "Settings", action = "Edit" });

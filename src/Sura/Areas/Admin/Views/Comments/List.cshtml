@@ -1,17 +1,17 @@
 ﻿@using Sura.Areas.Admin.Views.Comments.Models
 @model IEnumerable<List>
 @{
-    ViewBag.Title = "Comments";
+    ViewBag.Title = "NumberOfComments";
     var unapproved = Model.Where(x => x.Approved == false).Count();
 }
-<section class="span12 columns">
-  <h1>Comments</h1>
+<section class="span12">
+  <h1>NumberOfComments</h1>
 
 @if (ViewBag.AllowComments == false)
 {
   <div class="alert">
     <a data-dismiss="alert" class="close">×</a>
-    Comments are currently disabled throughout the blog. @Html.ActionLink("Change this setting", "Edit", "Settings")
+    NumberOfComments are currently disabled throughout the blog. @Html.ActionLink("Change this setting", "Edit", "Settings")
   </div>
 }
 
@@ -19,7 +19,7 @@
 {
   <div class="alert">
     <a data-dismiss="alert" class="close">×</a>
-    Comments are not currently moderated. New comments will viewable to the public. @Html.ActionLink("Change this setting", "Edit", "Settings")
+    NumberOfComments are not currently moderated. New comments will viewable to the public. @Html.ActionLink("Change this setting", "Edit", "Settings")
   </div>
 }
 

@@ -1,11 +1,15 @@
 @using Sura.Views.Blog.Models
 @model IEnumerable<Comment>
+           
 @foreach (var comment in Model)
 {
-    <div class="row">
-    <h5 class="seven columns">@comment.Name</h5>
-    <time class="five columns">@comment.WrittenAt</time>          
-    </div> 
+<div class="comment row">
+  <header>
+    <h5 class="span9">@comment.Name</h5>
+    <time datetime="@comment.WrittenAt.ToString("yyyy-MM-dd")" pubdate class="span3">@comment.WrittenAt</time>
+  </header>
+  <div>
     @comment.Body
-    <hr />       
+  </div>
+</div>    
 }

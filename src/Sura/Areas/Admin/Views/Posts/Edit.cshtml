@@ -45,7 +45,7 @@
       }
 }
 
-<section class="span12 columns">
+<section class="span12">
 <h1>Edit - '@Model.Title'</h1>
 
 @if (@ViewBag.Success == true)
@@ -115,7 +115,7 @@
     </div>
 
      <div class="control-group">   
-      <label class="control-label" for="EnableComments">Comments</label>
+      <label class="control-label" for="EnableNumberOfComments">NumberOfComments</label>
       <div class="controls">
         @Html.EnumDropDownListFor(model => model.EnableComments, new { @class = "span2" })
       </div>

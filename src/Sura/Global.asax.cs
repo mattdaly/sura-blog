@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -46,8 +47,10 @@ namespace Sura
             Mapper.Initialize(x =>
             {
                 // blog
-                x.CreateMap<Post, Sura.Views.Blog.Models.List>()
-                    .ForMember(dest => dest.Content, opt => opt.MapFrom(src => MvcHtmlString.Create(src.Body)));
+                x.CreateMap<Post, Sura.Views.Blog.Models.Post>()
+                    .ForMember(dest => dest.Content, opt => opt.MapFrom(src => MvcHtmlString.Create(src.Body)))
+                    .ForMember(dest => dest.Comments, opt => opt.UseValue(new List<Views.Blog.Models.Comment>()))
+                    .ForMember(dest => dest.Comment, opt => opt.UseValue(new Views.Blog.Models.Comment()));
 
                 // dasboard
                 x.CreateMap<User, Sura.Areas.Admin.Views.Dashboard.Models.User>()

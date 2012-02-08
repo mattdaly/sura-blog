@@ -23,7 +23,7 @@ namespace Sura.Models
         public string LastEditedBy { get; set; }
 
         public bool EnableComments { get; set; }
-        public int Comments { get; set; }
+        public int NumberOfComments { get; set; }
 
         public Post(string title, string slug, string author, string body)
         {

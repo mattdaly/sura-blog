@@ -40,7 +40,7 @@
       }
 }
 
-<section class="span12 columns">
+<section class="span12">
   <h1>New Post</h1>
 
 @using (Html.BeginForm("Create", "Posts", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
@@ -100,7 +100,7 @@
     </div>
 
      <div class="control-group">   
-      <label class="control-label" for="EnableComments">Comments</label>
+      <label class="control-label" for="EnableNumberOfComments">NumberOfComments</label>
       <div class="controls">
         @Html.EnumDropDownListFor(model => model.EnableComments, new { @class = "span2" })
       </div>

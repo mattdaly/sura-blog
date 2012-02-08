@@ -1,56 +1,64 @@
-﻿@using Sura.Views.Blog.Models
-@model Post
+﻿@model Sura.Views.Blog.Models.Post
 @{
     ViewBag.Title = Model.Title;
     ViewBag.Description = Model.Description;
+    Model.Comment.PostId = Model.Id;
+}
+if (ViewBag.Posted)
+{
+<div class="alert alert-success">
+  <a data-dismiss="alert" class="close">&times;</a>
+  Your comment was posted successfully.
+</div>
+}
+else if (ViewBag.AwaitingModeration)
+{
+<div class="alert alert-warning">
+  <a data-dismiss="alert" class="close">&times;</a>
+  Your comment was posted and is awaiting moderation
+</div>
 }
 
-<section class="twelve columns">
-<div class="row">
-     <article class="panel">
-        <header class="row">
-            <h3 class="nine columns"><a href="@Url.Action("Post", "Blog", new { slug = @Model.Slug })">@Model.Title</a></h3>
-            <time datetime="@Model.Published.Value.ToString("yyyy-MM-dd")" pubdate  class="three columns">@Html.Published(@Model.Published)</time>
-        </header>
+<article id="post" class="panel row">
+  <header class="row">
+    <h3 class="span9"><a href="@Url.Action("Post", "Blog", new { slug = @Model.Slug })">@Model.Title</a></h3>
+    <time datetime="@Model.PublishedAt.Value.ToString("yyyy-MM-dd")" pubdate>@Html.Published(@Model.PublishedAt)</time>
+  </header>
 
-        <div class="article-content row">
-            @Model.Body
-        </div>
+  <div class="article-content row">
+    @Model.Content
+  </div>
 
-        <footer class="row">
-            <ul class="tags nine columns">
-                <li>Tags: </li>
-                @foreach (var tag in Model.Tags)
-                {
-                <li><a href="@Url.Action("Tag", "Blog", new { tag = @tag })">@tag</a></li>               
-                }
-            </ul>            
-        </footer>
-    </article>
-</div>
-
-<div class="row">
-    <aside id="comments" class="twelve columns">
-        <h3>Comments</h3>
-    @if (Model.EnableComments)
+  <footer class="row">
+    <ul class="tags span9">
+      <li>Tags: </li>
+    @foreach (var tag in Model.Tags)
     {
-        if (Model.Comments.Count() == 0)
-        {
-            <p>There are no comments yet, be the first to comment.</p> 
-        }
-        else
-        {
-            @Html.Partial("_Comments", Model.Comments)  
-        }
-    
-        @Html.Partial("_AddComment", Model.Comment)   
+      <li><a href="@Url.Action("Tag", "Blog", new { tag = @tag })">@tag</a></li>               
     }
-    else
-    {
-        <p>Comments are closed</p>                
+    </ul>            
+  </footer>
+</article>
+
+<aside id="post-comments" class="row">
+    <h3>Comments</h3>
+  @if (Model.EnableComments)
+  {
+      if (Model.Comments.Count() == 0)
+      {
+      <p>There are no comments yet, be the first to comment.</p> 
+      }
+      else
+      {
+       @Html.Partial("_Comments", Model.Comments)  
+      }
+
+      @Html.Partial("_AddComment", Model.Comment)   
+  }
+  else
+  {
+      <p>Comments are closed</p>
    
-        @Html.Partial("_Comments", Model.Comments)    
-    }
-    </aside>
-</div>
-</section>
+      @Html.Partial("_Comments", Model.Comments)    
+  }
+  </aside>

@@ -1,26 +1,46 @@
 @using Sura.Views.Blog.Models
 @model Comment
 
-@using (Html.BeginForm("Comment", "Blog", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+@using (Html.BeginForm("Comment", "Blog", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
 {
     @Html.ValidationSummary()
-    <fieldset>
-        <h5>Post A Comment</h5>
+    @Html.HiddenFor(model => model.PostId)
 
-        @Html.HiddenFor(model => model.PostId)
+    <fieldset class="panel row">
+      <legend>Post A Comment</legend>
 
-        @Html.LabelFor(model => model.Name)
-        @Html.TextBoxFor(model => model.Name, new { @class = "input-text" })
+      <div class="control-group">   
+        <label class="control-label" for="Name">Name</label>
+        <div class="controls">
+          @Html.TextBoxFor(model => model.Name)
+          <p class="help-inline"><span class="label label-important">Required</span></p>
+        </div>
+      </div>
+      
+      <div class="control-group">   
+        <label class="control-label" for="Email">Email</label>
+        <div class="controls">
+          @Html.TextBoxFor(model => model.Email)
+          <p class="help-inline"><span class="label label-important">Required</span></p>
+        </div>
+      </div>
 
-        @Html.LabelFor(model => model.Email)
-        @Html.TextBoxFor(model => model.Email, new { @class = "input-text" })
+      <div class="control-group">   
+        <label class="control-label" for="Url">Url</label>
+        <div class="controls">
+          @Html.TextBoxFor(model => model.Url)
+        </div>
+      </div>
 
-        @Html.LabelFor(model => model.Url)
-        <input id="Url" name="Url" type="url" value="" class="input-text" />
-
-        @Html.LabelFor(model => model.Body)
+      <div class="control-group">   
+        <label class="control-label" for="Body">Comment</label>
+        <div class="controls">
         @Html.TextAreaFor(model => model.Body, new { @class = "body" })
-
-        <input type="submit" value="Post Comment"  class="nice radius blue button" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <input type="submit" value="Post Comment"  class="btn btn-primary" />
+        <input type="reset" value="Cancel" class="btn" />
+      </div>
     </fieldset>
 }

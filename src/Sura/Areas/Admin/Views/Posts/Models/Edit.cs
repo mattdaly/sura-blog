@@ -28,7 +28,7 @@ namespace Sura.Areas.Admin.Views.Posts.Models
         [Required(ErrorMessage = "You must write some content for the post")]
         public string Body { get; set; }
 
-        [Display(Name = "Comments")]
+        [Display(Name = "NumberOfComments")]
         public Status EnableComments { get; set; }
 
         public bool IsTrashed { get; set; }

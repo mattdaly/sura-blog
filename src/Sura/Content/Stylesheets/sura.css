@@ -1,76 +1,139 @@
-::selection {
-	background: #049cdb; /* Safari */
-    color: #fff;
-	}
-::-moz-selection {
-	background: #049cdb; /* Firefox */
-    color: #fff;
-}
+::-moz-selection, ::selection { background: #049cdb; color: #fff;	}
 
-body { background: #fff; font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif; font-size: 13px; line-height: 18px; color: #555; position: relative; -webkit-font-smoothing: antialiased; }
-
-header#head 
+.container > .row
 {
-    position: relative;
+    margin-left: 1%;
+    width: 98%;
 }
 
-header#head h1
-{   
-    font-family: 'Chewy', cursive;
-    line-height: 100px;
-    margin: 0;
-    padding-left: 12px;
-    position: relative;
-}
-
-nav#menu 
+.container > header p
 {
-    background: #eee;
-    border-radius: 8px;
-    box-shadow: inset 3px 3px 3px #ddd;
-    color: #000;
-    width: 110%;
+    font-size: 2em;
+    font-weight: bold;
+    height: 80px;
+    line-height: 90px;
+    vertical-align: top;
 }
 
-nav#menu ul
+.container > header p span 
 {
-    height: 30px;
-    line-height: 30px;
-    margin-bottom: 0;
-    margin-left: 1em;
+    font-family: 'Chewy', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.8em;
+    margin-right: 0.1em;
+    line-height: 83px;
 }
 
-nav#menu li a
+.container > header a:hover, .container > nav a:hover
 {
-    color: #000;
+    background: 0;
+    text-decoration: none;
 }
 
-nav#menu li a:hover
-{
-    color: crimson;
-}
-
-footer#foot
+.container > footer
 {
     border-top: 1px solid #ddd;
     margin-bottom: 1.65em;
 }
 
-div.row.main .twelve.columns
+.container > nav
 {
-    margin-left: 1%;
-    padding-top: 10px;
-    position: relative;
-    width: 98%;
+    background: #eee;
+    border-radius: 8px;
+    box-shadow: inset 3px 3px 3px #ddd;
+    color: #000;
 }
+
+.container > nav.row
+{
+    margin-left: 0%;
+    width: 100%;
+}
+
+.container > nav ul
+{
+    margin-bottom: 0;
+}
+
+.container > nav ul li
+{
+    display: inline;
+    float: left;
+    padding: 0 15px;
+}
+
+.container > nav li a
+{
+    color: #000;
+}
+
+.container > nav li a:hover, .container > nav li.current-page a
+{
+    color: #c3325f;
+}
+
+.container > nav li, .container > nav span
+{
+    height: 30px;
+    line-height: 30px;
+}
+
+.container > nav span
+{ 
+    display: block;
+    float: right;
+    padding-right: 15px;
+    text-align: right;
+}
+
+.container > section
+{
+    padding-top: 15px;
+    position: relative;
+}
+
+.panel 
+{
+    background: #efefef;
+    background: -moz-linear-gradient(top, #FFFFFF 0%, #F4F4F4 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#F4F4F4));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F4F4F4',GradientType=0 );
+    border: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    margin: 0 0 30px 0;
+    padding: 20px 1% 2px 1%;
+}
+
+fieldset.panel
+{
+    margin-top: -1.3em;
+}
+
+fieldset.panel legend
+{
+    border: 0;
+    height:15px;
+    font-size: 1.5em;
+    padding-top: 1.3em;
+    margin: 0;
+}
+
+.container > div.row h1
+{
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+}
+
 
 article header
 {
     border-bottom: 1px solid #eee;
 }
 
-time
+article header time, #post-comments .comment time
 {    
+    float: right;
     text-align: right;
 }
 
@@ -82,7 +145,8 @@ article .article-content
 article footer
 {
     border-top: 1px solid #ddd;
-    padding-top: 1em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
 }
 
 article ul.tags
@@ -117,17 +181,30 @@ article ul.tags li:first-child:after, article ul.tags li:last-child:after
 
 article .comments
 {
+    float: right;
     text-align: right;
+}
+
+#post-comments .comment 
+{
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
 }
 
 textarea.body
 {
     height: 200px;
-    width: 70%;
+    width: 98%;
 }
 
 div.validation-summary-errors li
 {
     padding: 6px 7px; font-weight: bold; font-size: 13px; background: #eee; border: 1px solid rgba(0,0,0,0.1); margin-bottom: 12px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; text-shadow: 0 1px rgba(255,255,255,0.9); 
 	background-color: #c00000; color: #fff; text-shadow: 0 -1px rgba(0,0,0,0.3);
+}
+
+
+.help-inline.required 
+{
+    color: #c09853;
 }

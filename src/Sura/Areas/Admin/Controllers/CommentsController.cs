@@ -99,7 +99,7 @@ namespace Sura.Areas.Admin.Controllers
                 postComments.ApprovedComments.Add(comment);
             }
 
-            post.Comments++;
+            post.NumberOfComments++;
 
             Session.SaveChanges();
 

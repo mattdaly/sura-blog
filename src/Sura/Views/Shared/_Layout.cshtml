@@ -1,42 +1,42 @@
-﻿<!doctype html>
-
+﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+  <head>
+    <meta charset="utf-8">
     <title>@ViewBag.Title</title>
 
     <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/foundation.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/bootstrap.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/sura.css")" />
+    @RenderSection("stylesheets", false)    
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
 
-	<!--[if lt IE 9]>
-		<link rel="stylesheet" href="@Url.Content("~/Content/Stylesheets/ie.css")" />
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-</head>
-<body>
-<div class="container">
-    <header id="head" class="row">
-        <h1 class="eight columns">@Html.RouteLink("Sura", "Blog")</h1>
-    </header>
+  <body>
+    <div class="container">
+      <header class="row">
+        <p><span>@Html.RouteLink("Sura", "Blog")</span></p>
+      </header>
 
-    <nav id="menu" class="row">
-        <ul class="nine columns">
+      <nav class="row">
+        <ul class="nav span8">
             <li>@Html.ActionLink("Home", "List", "Blog")</li>
         </ul>
-    </nav>
-    
-    <div class="row main">
-        @RenderBody()
+      </nav>
+
+      <section class="row">
+          @RenderBody()
+      </section>
+
+      <footer class="row">
+      </footer>
     </div>
 
-    <footer id="foot" class="row">
-    </footer>
-</div>
-	<script src="@Url.Content("~/Content/Javascripts/jquery.min.js")"></script>
-	<script src="@Url.Content("~/Content/Javascripts/modernizr.foundation.js")"></script>
-	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-	<script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
-</body>
+    <script src="@Url.Content("~/Content/Javascripts/jquery.min.js")"> </script>
+    <script src="@Url.Content("~/Content/Javascripts/bootstrap.min.js")"> </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"> </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"> </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.unobtrusive-ajax.min.js"> </script>
+  </body>
 </html>

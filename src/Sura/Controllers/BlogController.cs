@@ -26,13 +26,11 @@ namespace Sura.Controllers
                                .OrderByDescending(x => x.PublishedAt)
                                .ToList();
 
-            var model = Mapper.Map<IEnumerable<Post>, IEnumerable<Sura.Views.Blog.Models.List>>(posts);
-
-            return View(model);
+            return View(Mapper.Map<IEnumerable<Post>, IEnumerable<Sura.Views.Blog.Models.Post>>(posts));
         }
 
         [HttpGet]
-        public ActionResult Post(string slug)
+        public ActionResult Post(string slug, bool posted = false, bool moderation = false)
         {
             var comments = Session.Query<PostComments>()
                                   .Include(p => p.PostId)
@@ -48,7 +46,21 @@ namespace Sura.Controllers
             if (post == null)
                 return new HttpStatusCodeResult(404, "We're having trouble finding that post right now.");
 
-            return View(Map(post, comments));
+            var model = Mapper.Map<Post, Sura.Views.Blog.Models.Post>(post);
+            model.Comments = comments.ApprovedComments.Select(
+                comment => new Views.Blog.Models.Comment()
+                               {
+                                   Name = comment.Author,
+                                   Email = comment.AuthorEmail,
+                                   Url = comment.AuthorUrl,
+                                   Body = comment.Body,
+                                   WrittenAt = comment.WrittenAt
+                               });
+
+            ViewBag.Posted = posted;
+            ViewBag.AwaitingModeration = moderation;
+            
+            return View(model);
         }
 
         [HttpPost]
@@ -65,9 +77,9 @@ namespace Sura.Controllers
                 ModelState.AddModelError("Required", "You must some content for your comment.");
 
             var comments = Session.Query<PostComments>()
-                                 .Customize(x => x.Include<PostComments>(y => y.PostId))
-                                 .Where(x => x.PostId == model.PostId)
-                                 .FirstOrDefault();
+                                  .Include(x => x.PostId)
+                                  .Where(x => x.PostId == model.PostId)
+                                  .FirstOrDefault();
 
             if (comments == null)
                 return new HttpStatusCodeResult(404, "We're having trouble loading the comments for that post.");
@@ -96,19 +108,23 @@ namespace Sura.Controllers
             };
 
             var settings = Settings.Load();
+            var posted = false;
+            var moderation = false;
 
             if (settings.CommentsRequireApproval == false)
             {
                 comments.ApprovedComments.Add(comment);
-                post.Comments++;
+                post.NumberOfComments++;
+                posted = true;
             }
             else
             {
                 comments.UnapprovedComments.Add(comment);
+                moderation = true;
             }
 
             Session.SaveChanges();
-            return RedirectToAction("Post", new { slug = post.Slug });
+            return RedirectToAction("Post", new { slug = post.Slug, posted, moderation });
         }
 
         [HttpGet]
@@ -127,7 +143,7 @@ namespace Sura.Controllers
 
             ViewBag.Tag = tag;
 
-            return View(Mapper.Map<IEnumerable<Post>, IEnumerable<Views.Blog.Models.List>>(posts));
+            return View(Mapper.Map<IEnumerable<Post>, IEnumerable<Sura.Views.Blog.Models.Post>>(posts));
         }
 
 
@@ -156,43 +172,7 @@ namespace Sura.Controllers
                 ViewBag.Day = day.Value < 10 ? "0" + day.Value : day.ToString();
             }
 
-            return View(Mapper.Map<IEnumerable<Post>, IEnumerable<Views.Blog.Models.List>>(posts));
-        }
-
-
-        private static Views.Blog.Models.Post Map(Post post, PostComments comments)
-        {
-            var model = new Views.Blog.Models.Post
-            {
-                Id = post.Id,
-                Slug = post.Slug,
-                Title = post.Title,
-                Description = post.Description,
-                Body = MvcHtmlString.Create(post.Body),
-                Tags = post.Tags,
-                Published = post.PublishedAt,
-                Author = post.Author,
-                Comments = new List<Views.Blog.Models.Comment>(),
-                EnableComments = post.EnableComments,
-                Comment = new Views.Blog.Models.Comment()
-            };
-
-            model.Comment.PostId = post.Id;
-
-            if (comments != null)
-            {
-                model.Comments = comments.ApprovedComments.Select(
-                                                    comment => new Views.Blog.Models.Comment()
-                                                    {
-                                                        Name = comment.Author,
-                                                        Email = comment.AuthorEmail,
-                                                        Url = comment.AuthorUrl,
-                                                        Body = comment.Body,
-                                                        WrittenAt = comment.WrittenAt
-                                                    });
-            }
-            
-            return model;
+            return View(Mapper.Map<IEnumerable<Post>, IEnumerable<Sura.Views.Blog.Models.Post>>(posts));
         }
     }
 }

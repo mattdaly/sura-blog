@@ -7,7 +7,7 @@
         // Users
         public int KeepUsersOnlineFor { get; set; }
 
-        // Comments
+        // NumberOfComments
         public bool EnableComments { get; set; }
         public bool CommentsRequireApproval { get; set; }
         
