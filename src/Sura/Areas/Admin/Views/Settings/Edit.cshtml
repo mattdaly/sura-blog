@@ -3,48 +3,65 @@
     ViewBag.Title = "Edit Blog Settings";
 }
 
-<section class="twelve columns">
-    <h3>Edit Blog Settings</h3>
+<section class="span12 columns">
+  <h1>Edit Blog Settings</h1>
 
 @if (@ViewBag.Success == true)
 {
-    <div class="alert-box success ">
+    <div class="alert alert-success ">
+        <a data-dismiss="alert" class="close">&times;</a>
         The blog settings were successfully updated.
-        <a href="" class="close">&times;</a>
     </div>
 }
 
-@using (Html.BeginForm("Edit", "Settings", FormMethod.Post, new { @class = "nice" }))
+
+@using (Html.BeginForm("Edit", "Settings", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
 {
-    @Html.ValidationSummary()
+  @Html.ValidationSummary()
     @Html.HiddenFor(model => model.Id)
+            
+  <fieldset class="panel">
+    <legend>Users</legend>
 
-    <fieldset>
-        <h5>Users</h5>
-        
-        <label for="KeepUsersOnlineFor" class="mins">
-            <span>Keep Logged In Users Online For: </span>
-            @Html.TextBoxFor(model => model.KeepUsersOnlineFor, new { @class = "input-text" }) <span>minutes</span>
-        </label>
-    </fieldset>
-
-    <fieldset>
-        <h5>Comments</h5>        
-        
-        <label for="EnableComments">
-            <span>Enable Comments: </span>
-            @Html.RadioButtonFor(model => model.EnableComments, true) Yes
-            @Html.RadioButtonFor(model => model.EnableComments, false) No
-        </label>
-
-        <label for="CommentsRequireApproval">
-            <span>New Comments Require Moderation: </span>
-            @Html.RadioButtonFor(model => model.CommentsRequireApproval, true) Yes
-            @Html.RadioButtonFor(model => model.CommentsRequireApproval, false) No
-        </label>
-    </fieldset>
+    <div class="control-group">
+      <label class="control-label" for="KeepUsersOnlineFor">Keep Users Online For</label>
+      <div class="controls">
+        <div class="input-append">
+          @Html.TextBoxFor(model => model.KeepUsersOnlineFor, new { @class = "mins" })
+          <span class="add-on">minutes</span>
+        </div>
+      </div>
+    </div>
+  </fieldset>    
     
-    <input type="submit" value="Update Settings" class="nice radius blue button" />
-}
+  <fieldset class="panel">
+    <legend>Comments</legend>   
 
+    <div class="control-group">
+      <label class="control-label" for="EnableComments">Enable Comments</label>
+      <div class="controls">
+        <label class="radio">
+          @Html.RadioButtonFor(model => model.EnableComments, true) Yes
+        </label>        
+        <label class="radio">
+          @Html.RadioButtonFor(model => model.EnableComments, false) No
+        </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="CommentsRequireApproval">Moderate Comments</label>
+      <div class="controls">
+        <label class="radio">
+          @Html.RadioButtonFor(model => model.CommentsRequireApproval, true) Yes
+        </label>        
+        <label class="radio">
+          @Html.RadioButtonFor(model => model.CommentsRequireApproval, false) No
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  
+  <input type="submit" value="Update Settings" class="btn btn-primary" />
+} 
 </section>

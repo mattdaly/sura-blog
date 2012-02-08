@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Edit Account";
 }
-<section class="twelve columns">
-    <h3>Account</h3>
+<section class="span12 columns">
+  <h1>Account</h1>
 @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
 {
     @Html.ValidationSummary() 

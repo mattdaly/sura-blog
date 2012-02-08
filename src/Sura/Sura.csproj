@@ -140,10 +140,12 @@
     <Content Include="Content\Images\Sura\scheduler\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
     <Content Include="Content\Images\Sura\scheduler\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
     <Content Include="Content\Images\Sura\scheduler\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\Javascripts\bootstrap.min.js" />
     <Content Include="Content\Javascripts\Sura\sura-admin-posts.min.js" />
     <Content Include="Content\Javascripts\Sura\sura-admin.js" />
     <Content Include="Content\Javascripts\jquery.min.js" />
     <Content Include="Content\Javascripts\modernizr.foundation.js" />
+    <Content Include="Content\Stylesheets\bootstrap.min.css" />
     <Content Include="Content\Stylesheets\sura.css" />
     <Content Include="Content\Stylesheets\foundation.css" />
     <Content Include="Content\Stylesheets\ie.css" />

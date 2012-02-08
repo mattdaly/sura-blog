@@ -1,9 +1,9 @@
 ::selection {
-	background: #00a6fc; /* Safari */
+	background: #049cdb; /* Safari */
     color: #fff;
 	}
 ::-moz-selection {
-	background: #00a6fc; /* Firefox */
+	background: #049cdb; /* Firefox */
     color: #fff;
 }
 

@@ -3,110 +3,100 @@
 @{
     ViewBag.Title = "Posts";
 }
-<section class="twelve columns">
-<h3>Posts</h3>
+<section class="span12 columns">
+<h1>Posts</h1>
 
-<dl class="sub-nav tabbed">
-  <dt>Filter:</dt>
-  <dd class="active"><a href="#published">Published</a></dd>
-  <dd><a href="#scheduled">Scheduled</a></dd>
-  <dd><a href="#drafts">Drafts</a></dd>
-  <dd><a href="#trashed">Trashed</a></dd>
-</dl>
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#published" data-toggle="tab">Published</a></li>
+    <li><a href="#scheduled" data-toggle="tab">Scheduled</a></li>
+    <li><a href="#drafts" data-toggle="tab">Drafts</a></li>
+    <li><a href="#trashed" data-toggle="tab">Trashed</a></li>
+  </ul>
+  <div class="tab-content">
+    <table id="published" class="tab-pane table table-striped active">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Published</th>
+          <th>Written By</th>
+          <th>Written At</th>
+        </tr>
+      </thead>
+      <tbody>
+@foreach (var post in Model.Where(x => x.PublishedAt != null && x.TrashedAt == null && x.PublishedAt <= DateTimeOffset.Now))
+{       <tr>
+          <td>@Html.ActionLink(@post.Title, "Edit", "Posts", new { slug = @post.Slug }, null)</td>
+          <td>@post.PublishedAt.Value.ToString("dd/MM/yy HH:mm")</td>
+          <td>@post.Author</td>
+          <td>@post.CreatedAt.ToString("dd/MM/yy HH:mm") </td>
+        </tr>
+}
+      </tbody>
+    </table>
 
-<ul class="tabs-content">
-    <li class="active" id="publishedTab">
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Published</th>
-                    <th>Written By</th>
-                    <th>Written At</th>
-                </tr>
-            </thead>
-            <tbody> @foreach (var post in Model.Where(x => x.PublishedAt != null && x.TrashedAt == null && x.PublishedAt <= DateTimeOffset.Now))
-                    {
-                 <tr>
-                    <td>@Html.ActionLink(@post.Title, "Edit", "Posts", new { slug = @post.Slug }, null)</td>
-                    <td>@post.PublishedAt.Value.ToString("dd/MM/yy HH:mm")</td>
-                    <td>@post.Author</td>
-                    <td>@post.CreatedAt.ToString("dd/MM/yy HH:mm") </td>
-                </tr> }
-            </tbody>            
-        </table>
-    </li>
-    <li id="scheduledTab">
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Scheduled For</th>
-                    <th>Written By</th>
-                    <th>Written At</th>
-                </tr>
-            </thead>
-            <tbody> @foreach (var post in Model.Where(x => x.PublishedAt != null && x.TrashedAt == null && x.PublishedAt > DateTimeOffset.Now))
-                    {
-                 <tr>
-                    <td>@Html.ActionLink(@post.Title, "Edit", "Posts", new { slug = @post.Slug }, null)</td>
-                    <td>@post.PublishedAt.Value.ToString("dd/MM/yy HH:mm") </td>
-                    <td>@post.Author</td>
-                    <td>@post.CreatedAt.ToString("dd/MM/yy HH:mm") </td>
-                </tr> }
-            </tbody>            
-        </table>
-    </li>
-    <li id="draftsTab">
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Written By</th>
-                    <th>Written At</th>
-                </tr>
-            </thead>
-            <tbody> @foreach (var post in Model.Where(x => x.PublishedAt == null && x.TrashedAt == null))
-                    {
-                 <tr>
-                    <td>@Html.ActionLink(@post.Title, "Edit", "Posts", new { slug = @post.Slug }, null)</td>
-                    <td>@post.Author</td>
-                    <td>@post.CreatedAt.ToString("dd/MM/yy HH:mm") </td>
-                </tr> }
-            </tbody>            
-        </table>
-    </li>
-    <li id="trashedTab">
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Trashed By</th>
-                    <th>Trashed At</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody> @foreach (var post in Model.Where(x => x.TrashedAt.HasValue))
-                    {
-                 <tr>
-                    <td>@Html.ActionLink(@post.Title, "Edit", "Posts", new { slug = @post.Slug }, null)</td>
-                    <td>@post.LastEditedBy</td>
-                    <td>@post.TrashedAt.Value.ToString("dd/MM/yy HH:mm")</td>
-                    <td> @Ajax.ActionLink("Delete", "Delete", new { slug = @post.Slug }, new AjaxOptions
-                    {
-                        HttpMethod = "DELETE",
-                        Confirm = "Are you sure you want to delete this post?",
-                        OnSuccess = "redirect('" + @Url.Action("List", "Posts") + "')"
-                    })</td>
-                </tr> }                
-            </tbody>            
-        </table>
-    </li>
-</ul>
+    <table id="scheduled" class="tab-pane table table-striped">    
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Scheduled For</th>
+          <th>Written By</th>
+          <th>Written At</th>
+        </tr>
+      </thead>
+      <tbody> 
+@foreach (var post in Model.Where(x => x.PublishedAt != null && x.TrashedAt == null && x.PublishedAt > DateTimeOffset.Now))
+{       <tr>
+          <td>@Html.ActionLink(@post.Title, "Edit", "Posts", new { slug = @post.Slug }, null)</td>
+          <td>@post.PublishedAt.Value.ToString("dd/MM/yy HH:mm") </td>
+          <td>@post.Author</td>
+          <td>@post.CreatedAt.ToString("dd/MM/yy HH:mm") </td>
+        </tr>
+}
+      </tbody>
+    </table>
 
+    <table id="drafts" class="tab-pane table table-striped">
+      <thead>
+        <tr>
+            <th>Title</th>
+            <th>Written By</th>
+            <th>Written At</th>
+        </tr>
+      </thead>
+      <tbody> @foreach (var post in Model.Where(x => x.PublishedAt == null && x.TrashedAt == null))
+            {
+            <tr>
+            <td>@Html.ActionLink(@post.Title, "Edit", "Posts", new { slug = @post.Slug }, null)</td>
+            <td>@post.Author</td>
+            <td>@post.CreatedAt.ToString("dd/MM/yy HH:mm") </td>
+        </tr> }
+      </tbody>            
+    </table>
 
-
-
-
+    <table id="trashed" class="tab-pane table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Trashed By</th>
+          <th>Trashed At</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+@foreach (var post in Model.Where(x => x.TrashedAt.HasValue))
+{       <tr>
+          <td>@Html.ActionLink(@post.Title, "Edit", "Posts", new { slug = @post.Slug }, null)</td>
+          <td>@post.LastEditedBy</td>
+          <td>@post.TrashedAt.Value.ToString("dd/MM/yy HH:mm")</td>
+          <td> @Ajax.ActionLink("Delete", "Delete", new { slug = @post.Slug }, new AjaxOptions
+            { HttpMethod = "DELETE", Confirm = "Are you sure you want to delete this post?", 
+              OnSuccess = "redirect('" + @Url.Action("List", "Posts") + "')" })</td>
+        </tr> 
+}                
+      </tbody>            
+    </table>
+  </div>
+</div>
 
 </section>

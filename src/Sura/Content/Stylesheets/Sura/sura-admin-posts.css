@@ -1,44 +1,147 @@
-/* scheduler */
+div.post-tags
+{
+    float: left;
+    margin-bottom: 0.35em;
+    width: 100%;
+}
 
-select#Availability 
+div.post-tags input, div.post-tags ul
 {
     clear: none;
-    width: 100px;
+    float: left;
+}
+
+ul.taglist
+{
+    clear: none;
+    color: #505050;
+    margin: 0 0 0 1em;
+    padding: 0;
+}
+
+ul.taglist li
+{    
+    clear: none;
+    display: inline-block;
+    float: left;   
+}
+
+ul.taglist.focused
+{
+    border-color: #878a8e;
+}
+
+ul.taglist li.tag
+{
+    background: url('../../Images/misc/input-bg.png') #eee;
+    border: 1px solid #ccc;    
+    border-radius: 3px 3px 3px 3px;
+    cursor: default;
+    list-style: none;
+    line-height: 1.95em;
+    margin: 0 0.75em 0 0;
+    padding: 0 1.35em 0 0.45em;
+    position: relative;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+ul.taglist li.tag:hover
+{
+    background-color: #ddd;
+}
+
+ul.taglist li.tag a.delete span 
+{
+    visibility: hidden;
+}
+
+ul.taglist li.tag a.remove
+{
+    background: url("../../Images/Sura/input-tag.png") 0 0 no-repeat;
+    cursor: pointer;    
+    height: 14px;
+    position: absolute;
+    right: 0.15em;
+    text-indent: -9999px;
+    text-decoration: none;
+    top: 0.47em;
+    width: 16px;
+}
+
+ul.taglist li.tag a.remove:hover
+{
+    background: url("../../Images/Sura/input-tag.png") 0 -15px no-repeat;
+}
+
+ul.taglist li.input
+{    
+    clear: none;
+    float: left;   
+}
+
+ul.taglist li input[type=text]
+{
+    border: solid 1px #bbb; 
+    border-radius: 2px; -webkit-border-radius: 2px; -moz-border-radius: 2px;
+    font-size: 13px; 
+    padding: 6px 3px 4px; 
+    outline: none !important; 
+    clear: none;
+    color: black;
+    cursor: text;
+    line-height: 1.76em;
+    float: left;    
+    margin: 0 0 0 0.15em;
+    padding: 0.125em 0.4em;
+    width: 
+}
+
+textarea.body
+{
+    height: 200px;
+    width: 98%;
+}
+
+textarea.description
+{
+    height: 75px;
+    width: 98%;
 }
 
 span#schedule-datetimepicker
 {
-    clear: none;
-    float: left;
-    height: 1.5em;
-    margin: -2.35em 0.4em 0 115px;
-    width: 35%;
+    display: inline-block;
+    height: 1.2em;
+    margin: 0;
+    width: 400px;
 }
 
 span#schedule-datetimepicker label
 {
-    clear: none;
-    float: left;
-    line-height: 1.9em;
-    width: auto;
-}
-
-span#schedule-datetimepicker img.ui-datepicker-trigger
-{
-    clear: none;
-    cursor: pointer;
-    float: left;
-    margin-top: 0.35em;
+    display: inline-block;
+    line-height: 1.7em;
+    margin-right: 5px;
+    text-align: right;
+    vertical-align: top;
+    width: 150px;
 }
 
 span#schedule-datetimepicker input
 {
-    clear: none;
-    float: left;
-    margin: 0.15em 0.5em 0 0.5em;
-    padding: 0 5px;
-    text-align: left;
-    width: 115px;
+    margin-top: -10px;
+    text-align: center;
+    width: 105px;
+}
+
+span#schedule-datetimepicker img.ui-datepicker-trigger
+{
+    cursor: pointer;
+    margin-left: 5px;
+    margin-top: 0.35em;
 }
 
 /* JQuery UI required styles */
@@ -136,115 +239,3 @@ span#schedule-datetimepicker input
 .ui-timepicker-div dl dt { height: 25px; }
 .ui-timepicker-div dl dd { margin: -25px 0 10px 65px; }
 .ui-timepicker-div td { font-size: 90%; padding-top: 5px; }
-
-div.post-tags
-{
-    float: left;
-    width: 100%;
-}
-
-div.post-tags input, div.post-tags ul
-{
-    clear: none;
-    float: left;
-}
-
-ul.taglist
-{
-    clear: none;
-    color: #505050;
-    margin: 0 0 0 0.75em;
-    padding: 0;
-}
-
-ul.taglist li
-{    
-    clear: none;
-    display: inline-block;
-    float: left;   
-}
-
-ul.taglist.focused
-{
-    border-color: #878a8e;
-}
-
-ul.taglist li.tag
-{
-    background: url('../../Images/misc/input-bg.png') #eee;
-    border: 1px solid #ccc;    
-    border-radius: 3px 3px 3px 3px;
-    cursor: default;
-    list-style: none;
-    line-height: 1.95em;
-    margin: 0.25em 0.75em 0.5em 0;
-    padding: 0 1.35em 0 0.45em;
-    position: relative;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-}
-
-ul.taglist li.tag:hover
-{
-    background-color: #ddd;
-}
-ul.taglist li.tag a.delete span 
-{
-    visibility: hidden;
-}
-
-ul.taglist li.tag a.remove
-{
-    background: url("../../Images/Sura/input-tag.png") 0 0 no-repeat;
-    cursor: pointer;    
-    height: 14px;
-    position: absolute;
-    right: 0.15em;
-    text-indent: -9999px;
-    text-decoration: none;
-    top: 0.47em;
-    width: 16px;
-}
-
-ul.taglist li.tag a.remove:hover
-{
-    background: url("../../Images/Sura/input-tag.png") 0 -15px no-repeat;
-}
-
-ul.taglist li.input
-{    
-    clear: none;
-    float: left;   
-}
-
-ul.taglist li input[type=text]
-{
-    border: solid 1px #bbb; 
-    border-radius: 2px; -webkit-border-radius: 2px; -moz-border-radius: 2px;
-    font-size: 13px; 
-    padding: 6px 3px 4px; 
-    outline: none !important; 
-    clear: none;
-    color: black;
-    cursor: text;
-    line-height: 1.76em;
-    float: left;    
-    margin: 0 0 0 0.15em;
-    padding: 0.125em 0.4em;
-    width: 
-}
-
-textarea.body
-{
-    height: 200px;
-    width: 70%;
-}
-
-textarea.description
-{
-    height: 100px;
-    width: 70%;
-}

@@ -44,7 +44,7 @@ namespace Sura.Areas.Admin.Controllers
                 ModelState.AddModelError("Required", "You must enter a title for the post.");
 
             if (string.IsNullOrWhiteSpace(model.Body))
-                ModelState.AddModelError("Required", "You must some content for the post.");
+                ModelState.AddModelError("Required", "You must write some content for the post.");
 
             if (model.Availability == Availability.Scheduled && model.ScheduleFor.HasValue == false)
                 ModelState.AddModelError("Required", "To schedule a post you must select a scheduled date and time.");

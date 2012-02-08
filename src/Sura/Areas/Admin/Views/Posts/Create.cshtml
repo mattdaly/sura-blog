@@ -40,49 +40,74 @@
       }
 }
 
-<section class="twelve columns">
-<h3>New Post</h3>
+<section class="span12 columns">
+  <h1>New Post</h1>
 
-@using (Html.BeginForm("Create", "Posts", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+@using (Html.BeginForm("Create", "Posts", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
 {
-    @Html.ValidationSummary() 
+  @Html.ValidationSummary() 
             
-    <fieldset>
-        <h5>Content</h5>
-        
-        @Html.LabelFor(model => model.Title)
-        @Html.TextBoxFor(model => model.Title, new { @class = "input-text" })     
+  <fieldset class="panel">
+    <legend>Post Content</legend>
 
-        @Html.LabelFor(model => model.Tags)
-        @Html.TextBoxFor(model => model.Tags, new { @class = "input-text", placeholder = "Separate tags with commas" })
+    <div class="control-group">   
+      <label class="control-label" for="Title">Title</label>
+      <div class="controls">
+        @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge" })
+        <p class="help-block">The title will also become to the slug used in the post url.</p>
+      </div>
+    </div>
 
-        @Html.LabelFor(model => model.Body)
-        @Html.TextAreaFor(model => model.Body, new { @class = "body"})
-    </fieldset>    
+    <div class="control-group">   
+      <label class="control-label" for="Tags">Tags</label>
+      <div class="controls">
+        @Html.TextBoxFor(model => model.Tags)
+        <p class="help-block">Tags associate posts with their content. Separate tags with commas.</p>
+      </div>
+    </div>
+
+    <div class="control-group">   
+      <label class="control-label" for="Body">Content</label>
+      <div class="controls">
+        @Html.TextAreaFor(model => model.Body, new { @class = "body" })
+      </div>
+    </div>
+  </fieldset>    
     
-    <fieldset>
-        <h5>SEO</h5>
+  <fieldset class="panel">
+    <legend>SEO</legend>
    
-        @Html.LabelFor(model => model.Description)
+    <div class="control-group">   
+      <label class="control-label" for="Description">Description</label>
+      <div class="controls">
         @Html.TextAreaFor(model => model.Description, new { @class = "description" })
-    </fieldset>    
-     
+      </div>
+    </div>
+  </fieldset>
     
-    <fieldset>
-        <h5>Settings</h5>
-                
-        @Html.LabelFor(model => model.Availability)
-        @Html.EnumDropDownListFor(model => model.Availability)
+  <fieldset class="panel row">
+    <legend>Settings</legend>
 
+    <div class="control-group">   
+      <label class="control-label" for="Availability">Availability</label>
+      <div class="controls">
+        @Html.EnumDropDownListFor(model => model.Availability, new { @class = "span2" })
         <span id="schedule-datetimepicker">
-            <label for="ScheduleFor">Select a time and date:</label>
-            <input id="ScheduleFor" name="ScheduleFor" type="text" value="" readonly="readonly" />
+          <label for="ScheduleFor">Select a time and date:</label>
+          <input id="ScheduleFor" name="ScheduleFor" type="text" value="" disabled />
         </span>
-        
-        @Html.LabelFor(model => model.EnableComments)
-        @Html.EnumDropDownListFor(model => model.EnableComments)
-    </fieldset>
-    
-    <input type="submit" value="Save New Post" class="nice radius blue button" />
+      </div>
+    </div>
+
+     <div class="control-group">   
+      <label class="control-label" for="EnableComments">Comments</label>
+      <div class="controls">
+        @Html.EnumDropDownListFor(model => model.EnableComments, new { @class = "span2" })
+      </div>
+    </div>
+  </fieldset>
+  
+  <input type="submit" value="Save New Post" class="btn btn-primary" />
+  <input type="reset" value="Cancel" class="btn" />
 } 
 </section>

@@ -5,47 +5,69 @@
     ViewBag.Title = "New User";
 }
 
-<section class="twelve columns">
-<h3>New User</h3>
+<section class="span12 columns">
+  <h1>New User</h1>
 
-<dl class="sub-nav not-tabbed">
-  <dt>Filter:</dt>
-  <dd class="active">@Html.ActionLink("New User", "Create", "Users")</dd>
-  <dd>@Html.ActionLink("List", "List", "Users")</dd>
-</dl>
+  <ul class="nav nav-pills">
+    <li class="filter">Filter:</li>
+    <li class="active">@Html.ActionLink("New User", "Create", "Users")</li>
+    <li>@Html.ActionLink("List", "List", "Users")</li>
+  </ul>
 
-@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
 {
-  
     @Html.ValidationSummary()
 
+    <fieldset class="panel">
+        <legend>User Details</legend>
 
-    <fieldset>
-        <h5>Create User</h5>
-        
-        @Html.LabelFor(model => model.Username)
-        @Html.TextBoxFor(model => model.Username, new { @class = "input-text" })
+        <div class="control-group">   
+          <label class="control-label" for="Username">Username</label>
+          <div class="controls">
+            @Html.TextBoxFor(model => model.Username)
+          </div>
+        </div> 
 
-        @Html.LabelFor(model => model.Password)
-        @Html.TextBoxFor(model => model.Password, new { @class = "input-text" })
+        <div class="control-group">   
+          <label class="control-label" for="Password">Password</label>
+          <div class="controls">
+            @Html.TextBoxFor(model => model.Password)
+          </div>
+        </div> 
 
-        @Html.LabelFor(model => model.PasswordRetype)
-        @Html.TextBoxFor(model => model.PasswordRetype, new { @class = "input-text" })
+        <div class="control-group">   
+          <label class="control-label" for="PasswordRetype">Password (Again)</label>
+          <div class="controls">
+            @Html.TextBoxFor(model => model.PasswordRetype)
+          </div>
+        </div> 
     </fieldset>    
     
-    <fieldset>
-        <h5>Personal Information</h5>
+    <fieldset class="panel">
+        <legend>Personal Information</legend>        
 
-        @Html.LabelFor(model => model.Firstname)
-        @Html.TextBoxFor(model => model.Firstname, new { @class = "input-text" })
+        <div class="control-group">   
+          <label class="control-label" for="Firstname">Firstname</label>
+          <div class="controls">
+            @Html.TextBoxFor(model => model.Firstname)
+          </div>
+        </div> 
 
-        @Html.LabelFor(model => model.Surname)
-        @Html.TextBoxFor(model => model.Surname, new { @class = "input-text" })
+        <div class="control-group">   
+          <label class="control-label" for="Surname">Surname</label>
+          <div class="controls">
+            @Html.TextBoxFor(model => model.Surname)
+          </div>
+        </div> 
 
-        @Html.LabelFor(model => model.Nickname)
-        @Html.TextBoxFor(model => model.Nickname, new { @class = "input-text" })
+        <div class="control-group">   
+          <label class="control-label" for="Nickname">Nickname</label>
+          <div class="controls">
+            @Html.TextBoxFor(model => model.Nickname)
+          </div>
+        </div>
     </fieldset>  
   
-    <input type="submit" value="Save New User" class="nice radius blue button" />
+    <input type="submit" value="Save New User" class="btn btn-primary" />
 }
 </section>

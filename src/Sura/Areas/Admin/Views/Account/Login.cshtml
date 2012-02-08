@@ -3,21 +3,20 @@
 @{
     ViewBag.Title = "Login";
 }
-<section class="twelve columns">  
-@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "nice" }))  
-{
-    <div class="login panel">
-        <h3>Login</h3>
+<section class="span12 columns">  
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-inline" }))  
+{ <fieldset class="panel">
+    <legend>Login</legend>
 
-        @Html.ValidationSummary()
+    @Html.ValidationSummary()
 
-        @Html.LabelFor(model => model.Username)
-        @Html.TextBoxFor(model => model.Username, new { @class = "input-text" })
+    @Html.LabelFor(model => model.Username)
+    @Html.TextBoxFor(model => model.Username)
         
-        @Html.LabelFor(model => model.Password)
-        @Html.PasswordFor(model => model.Password, new { @class = "input-text" })
+    @Html.LabelFor(model => model.Password)
+    @Html.PasswordFor(model => model.Password)
 
-        <input type="submit" value="Login" class="nice small radius blue button" />        
-    </div>
+    <input type="submit" value="Login" class="btn btn-primary" />   
+  </fieldset>
 }
 </section>

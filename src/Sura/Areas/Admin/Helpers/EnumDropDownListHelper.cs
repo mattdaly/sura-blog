@@ -30,11 +30,11 @@ namespace Sura.Areas.Admin.Helpers
             return methodCallExpression != null ? GetInputName(methodCallExpression) : expression.Object.ToString();
         }
 
-        public static MvcHtmlString EnumDropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression) where TModel : class
+        public static MvcHtmlString EnumDropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null) where TModel : class
         {
             var value = helper.ViewData.Model == null ? default(TProperty) : expression.Compile()(helper.ViewData.Model);
-
-            return helper.DropDownList(GetInputName(expression), ToSelectList(typeof(TProperty), value.ToString()));
+ 
+            return helper.DropDownList(GetInputName(expression), ToSelectList(typeof(TProperty), value.ToString()), null, htmlAttributes);
         }
 
         public static SelectList ToSelectList(Type enumType, string selected)

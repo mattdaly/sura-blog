@@ -3,7 +3,7 @@
 @using Sura.Areas.Admin.Views.Posts.Models
 @model Edit
 @{
-    ViewBag.Title = "New Post";
+    ViewBag.Title = "Edit '" + Model.Title + "'";
 }
 @section stylesheets
 {
@@ -45,85 +45,101 @@
       }
 }
 
-<section class="twelve columns">
-<h3>Edit - '@Model.Title'</h3>
+<section class="span12 columns">
+<h1>Edit - '@Model.Title'</h1>
 
 @if (@ViewBag.Success == true)
 {
-<div class="alert-box success ">
+<div class="alert alert-success">
+	<a data-dismiss="alert" class="close">&times;</a>
 	The post was successfully updated.
-	<a href="" class="close">&times;</a>
 </div>
 }
 
-@using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+@using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
 {
-    @Html.ValidationSummary() 
-    <fieldset>
-        <h5>Content</h5>
-        
-        @Html.LabelFor(model => model.Title)
-        @Html.TextBoxFor(model => model.Title, new { @class = "input-text" })     
+  @Html.ValidationSummary() 
+  @Html.HiddenFor(model => model.Id)
+    
+  <fieldset class="panel">
+    <legend>Post Content</legend>
 
-        @Html.LabelFor(model => model.Tags)
-        @Html.TextBoxFor(model => model.Tags, new { @class = "input-text", placeholder = "Type a tag name" })
+    <div class="control-group">   
+      <label class="control-label" for="Title">Title</label>
+      <div class="controls">
+        @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge" })
+        <p class="help-block">The title will also become to the slug used in the post url.</p>
+      </div>
+    </div>
 
-        @Html.LabelFor(model => model.Body)
+    <div class="control-group">   
+      <label class="control-label" for="Tags">Tags</label>
+      <div class="controls">
+        @Html.TextBoxFor(model => model.Tags)
+        <p class="help-block">Tags associate posts with their content. Separate tags with commas.</p>
+      </div>
+    </div>
+
+    <div class="control-group">   
+      <label class="control-label" for="Body">Content</label>
+      <div class="controls">
         @Html.TextAreaFor(model => model.Body, new { @class = "body" })
-    </fieldset>     
+      </div>
+    </div>
+  </fieldset>    
     
-    <fieldset>
-        <h5>SEO</h5>   
-
-        @Html.LabelFor(model => model.Description)
+  <fieldset class="panel">
+    <legend>SEO</legend>
+   
+    <div class="control-group">   
+      <label class="control-label" for="Description">Description</label>
+      <div class="controls">
         @Html.TextAreaFor(model => model.Description, new { @class = "description" })
-    </fieldset>    
+      </div>
+    </div>
+  </fieldset>    
+     
     
-    <fieldset>
-        <h5>Settings</h5>
+  <fieldset class="panel row">
+    <legend>Settings</legend>
 
-        @Html.HiddenFor(model => model.Id)
-              
-        <label for="Availability">
-            <span>Availability</span>
-            @Html.EnumDropDownListFor(model => model.Availability)
-            <span id="schedule-datetimepicker">
-                <label for="ScheduleFor">Select a time and date:</label>
-                <input id="ScheduleFor" name="ScheduleFor" type="text" value="@Model.ScheduleFor" readonly="readonly" />
-            </span>
-        </label>                          
-        
+    <div class="control-group">   
+      <label class="control-label" for="Availability">Availability</label>
+      <div class="controls">
+        @Html.EnumDropDownListFor(model => model.Availability, new { @class = "span2" })
+        <span id="schedule-datetimepicker">
+          <label for="ScheduleFor">Select a time and date:</label>
+          <input id="ScheduleFor" name="ScheduleFor" type="text" value="" disabled />
+        </span>
+      </div>
+    </div>
 
-
-        @Html.LabelFor(model => model.EnableComments)
-        @Html.EnumDropDownListFor(model => model.EnableComments)
-    </fieldset>
-    
-    
-    <input type="submit" value="Update Post" class="nice radius blue button" /> 
-} 
-
-<span class="sub-buttons">
+     <div class="control-group">   
+      <label class="control-label" for="EnableComments">Comments</label>
+      <div class="controls">
+        @Html.EnumDropDownListFor(model => model.EnableComments, new { @class = "span2" })
+      </div>
+    </div>
+  </fieldset>
+  
+  <div class="span3">
+    <input type="submit" value="Update Post" class="btn btn-primary" />
+  </div>
+  <div class="sub-buttons span9">
 @if (Model.IsTrashed)
 {
     @:<p>This post is currently in the trash, saving it will remove it from the trash and place it according to the 'availability' selection above.</p>
 }
 else
 {
-    @Ajax.ActionLink("Trash", "Trash", new { slug = @Model.Slug }, new AjaxOptions
-    {
-        HttpMethod = "POST",
-        Confirm = "Are you sure you want to trash this post?",
-        OnSuccess = "redirect('" + @UrlHelper.GenerateUrl(null, "List", "Posts", null, null, "trashed",
-            null, Url.RouteCollection, Url.RequestContext, false ) + "')"
-    }, new { @class = "nice small radius black button" })
+    @Ajax.ActionLink("Trash", "Trash", new { slug = @Model.Slug }, new AjaxOptions { HttpMethod = "POST", Confirm = "Are you sure you want to trash this post?",
+    OnSuccess = "redirect('" + @UrlHelper.GenerateUrl(null, "List", "Posts", null, null, "trashed", null, Url.RouteCollection, Url.RequestContext, false) + "')"}, new { @class = "btn btn-warning" })
 } 
-@Ajax.ActionLink("Permanently Delete", "Delete", new { slug = @Model.Slug }, new AjaxOptions
-{
-    HttpMethod = "DELETE",
-    Confirm = "Are you sure you want to delete this post? It will not be retrievable.",
-    OnSuccess = "redirect('" + @Url.Action("List", "Posts") + "')"
-}, new { @class = "nice small radius red button" })
-</span>
+
+    @Ajax.ActionLink("Permanently Delete", "Delete", new { slug = @Model.Slug }, 
+      new AjaxOptions { HttpMethod = "DELETE", Confirm = "Are you sure you want to delete this post? It will not be retrievable.",
+                        OnSuccess = "redirect('" + @Url.Action("List", "Posts") + "')"}, new { @class = "btn btn-danger" })
+  </div>
+}
 
 </section>
