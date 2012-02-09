@@ -41,11 +41,17 @@
 }
 @section breadcrumbs
 {
-<li>@Html.ActionLink("Posts", "List", "Posts") <span class="divider">/</span></li>
+<li><span class="divider">/</span> @Html.ActionLink("Posts", "List", "Posts") <span class="divider">/</span></li>
 <li class="active">@Html.ActionLink("New Post", "Create", "Posts")</li>
 }
 <section class="span12">
   <h1>New Post</h1>
+  
+  <ul class="nav nav-pills">
+    <li class="filter">Filter:</li>
+    <li class="active">@Html.ActionLink("New Post", "Create", "Posts")</li>
+    <li>@Html.ActionLink("List", "List", "Posts")</li>
+  </ul>
 
 @using (Html.BeginForm("Create", "Posts", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
 {

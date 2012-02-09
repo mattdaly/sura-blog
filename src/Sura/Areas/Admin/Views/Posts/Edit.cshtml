@@ -46,7 +46,7 @@
 }
 @section breadcrumbs
 {
-<li>@Html.ActionLink("Posts", "List", "Posts") <span class="divider">/</span></li>
+<li><span class="divider">/</span> @Html.ActionLink("Posts", "List", "Posts") <span class="divider">/</span></li>
 <li class="active">@Html.ActionLink(Model.Title, "Edit", "Posts", new { slug = Model.Slug}, null)</li>
 }
 <section class="span12">

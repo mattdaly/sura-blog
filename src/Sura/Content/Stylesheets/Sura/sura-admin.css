@@ -1,4 +1,14 @@
-::-moz-selection, ::selection { background: #049cdb; color: #fff;	}
+::-moz-selection, ::selection
+{
+     background: #049cdb; 
+     color: #fff;
+}
+
+html 
+{
+     overflow: -moz-scrollbars-vertical;    
+     overflow-y: scroll;
+}
 
 header .container a.brand
 {
@@ -96,7 +106,7 @@ fieldset.panel legend
 {
     color: #bbb;
     line-height: 2.6em;
-    margin-right: 1em;
+    margin-right: 0.75em;
 }
 
 input.mins 

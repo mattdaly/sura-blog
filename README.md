@@ -26,7 +26,7 @@ You can login via /admin/login.
 Screenshots
 ===========
 
-![Sura Settings](http://github.com/mattdaly/sura-blog/raw/master/screenshots/admin_settings.png)
+![Sura Settings](http://github.com/mattdaly/sura-blog/raw/master/screenshots/admin_settings_1440.png)
 
 ![Sura Posts](http://github.com/mattdaly/sura-blog/raw/master/screenshots/admin_posts.png)
 

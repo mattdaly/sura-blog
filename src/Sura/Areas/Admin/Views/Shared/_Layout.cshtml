@@ -41,7 +41,7 @@
       <div class="row main">
 @if (Request.IsAuthenticated)
 {       <ul class="breadcrumb">
-          <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
+          <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
           @RenderSection("breadcrumbs", false)
         </ul>
 }

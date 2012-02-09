@@ -5,10 +5,16 @@
 }
 @section breadcrumbs
 {
-<li class="active">@Html.ActionLink("Posts", "List", "Posts")</li>
+<li class="active"><span class="divider">/</span> @Html.ActionLink("Posts", "List", "Posts")</li>
 }
 <section class="span12">
 <h1>Posts</h1>
+
+<ul class="nav nav-pills">
+  <li class="filter">Filter:</li>
+  <li>@Html.ActionLink("New Post", "Create", "Posts")</li>
+  <li class="active">@Html.ActionLink("List", "List", "Posts")</li>
+</ul>
 
 <div class="tabbable tabs-left">
   <ul class="nav nav-tabs">
