@@ -46,11 +46,8 @@
 }
 @section breadcrumbs
 {
-<ul class="breadcrumb">
-  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
-  <li>@Html.ActionLink("Posts", "List", "Posts") <span class="divider">/</span></li>
-  <li class="active">@Html.ActionLink(Model.Title, "Edit", "Posts", new { slug = Model.Slug}, null)</li>
-</ul>
+<li>@Html.ActionLink("Posts", "List", "Posts") <span class="divider">/</span></li>
+<li class="active">@Html.ActionLink(Model.Title, "Edit", "Posts", new { slug = Model.Slug}, null)</li>
 }
 <section class="span12">
 <h1>Edit - '@Model.Title'</h1>
@@ -122,7 +119,7 @@
     </div>
 
      <div class="control-group">   
-      <label class="control-label" for="EnableNumberOfComments">NumberOfComments</label>
+      <label class="control-label" for="EnableComments">Comments</label>
       <div class="controls">
         @Html.EnumDropDownListFor(model => model.EnableComments, new { @class = "span2" })
       </div>

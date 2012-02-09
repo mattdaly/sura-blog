@@ -6,11 +6,8 @@
 }
 @section breadcrumbs
 {
-<ul class="breadcrumb">
-  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
-  <li>@Html.ActionLink("Users", "List", "Users") <span class="divider">/</span></li>
-  <li class="active">@Html.ActionLink("New User", "Create", "Users")</li>
-</ul>
+<li>@Html.ActionLink("Users", "List", "Users") <span class="divider">/</span></li>
+<li class="active">@Html.ActionLink("New User", "Create", "Users")</li>
 }
 <section class="span12">
   <h1>New User</h1>

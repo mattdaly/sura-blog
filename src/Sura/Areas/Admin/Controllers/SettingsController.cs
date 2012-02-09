@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Raven.Client;
+using Sura.Areas.Admin.Infrastructure;
 using Sura.Areas.Admin.Views.Settings.Models;
 using Sura.Controllers;
 using Sura.Models;
@@ -33,8 +34,8 @@ namespace Sura.Areas.Admin.Controllers
             var settings = new Settings
                                {
                                    KeepUsersOnlineFor = model.KeepUsersOnlineFor,
-                                   EnableComments = model.EnableComments,
-                                   CommentsRequireApproval = model.CommentsRequireApproval
+                                   EnableComments =  model.EnableComments == Status.Enabled,
+                                   CommentsRequireApproval = model.CommentsRequireApproval == Status.Enabled
                                };
 
             Settings.Save(settings);

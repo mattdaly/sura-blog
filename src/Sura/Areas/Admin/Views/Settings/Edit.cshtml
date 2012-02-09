@@ -4,10 +4,7 @@
 }
 @section breadcrumbs
 {
-<ul class="breadcrumb">
-  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
-  <li class="active">@Html.ActionLink("Settings", "Edit", "Settings")</li>
-</ul>
+<li class="active">@Html.ActionLink("Settings", "Edit", "Settings")</li>
 }
 <section class="span12 columns">
   <h1>Edit Blog Settings</h1>
@@ -40,31 +37,21 @@
   </fieldset>    
     
   <fieldset class="panel">
-    <legend>NumberOfComments</legend>   
+    <legend>Comments</legend>   
 
     <div class="control-group">
-      <label class="control-label" for="EnableNumberOfComments">Enable Comments</label>
+      <label class="control-label" for="EnableComments">Enable Comments</label>
       <div class="controls">
-        <label class="radio">
-          @Html.RadioButtonFor(model => model.EnableComments, true) Yes
-        </label>        
-        <label class="radio">
-          @Html.RadioButtonFor(model => model.EnableComments, false) No
-        </label>
+        @Html.EnumDropDownListFor(model => model.EnableComments, new { @class = "span2" })
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="NumberOfCommentsRequireApproval">Moderate Comments</label>
+      <label class="control-label" for="CommentsRequireApproval">Moderate Comments</label>
       <div class="controls">
-        <label class="radio">
-          @Html.RadioButtonFor(model => model.CommentsRequireApproval, true) Yes
-        </label>        
-        <label class="radio">
-          @Html.RadioButtonFor(model => model.CommentsRequireApproval, false) No
-        </label>
+        @Html.EnumDropDownListFor(model => model.CommentsRequireApproval, new { @class = "span2" })
       </div>
-    </div>
+    </div>      
   </fieldset>
   
   <input type="submit" value="Update Settings" class="btn btn-primary" />

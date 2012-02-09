@@ -11,6 +11,12 @@ header .container a.brand:hover, header .container .nav-user a:hover
     color: #f89406;
 }
 
+.navbar .navbar-inner
+{
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+}
 header .container .nav-user
 {
     color: #fff;

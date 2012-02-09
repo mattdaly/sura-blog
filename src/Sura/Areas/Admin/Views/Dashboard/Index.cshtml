@@ -17,12 +17,6 @@
         }
     }
 }
-@section breadcrumbs
-{
-<ul class="breadcrumb">
-  <li class="active">@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
-</ul>
-}
 <section class="span12">
     <h1>Dashboard</h1>
     <p>Hello, @name. You last logged in at @Model.LastLoginAt.Value.ToString("HH:MM tt on dddd, MMMM dd, yyyy")</p>

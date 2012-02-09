@@ -39,7 +39,12 @@
 
     <div class="container">       
       <div class="row main">
-        @RenderSection("breadcrumbs", false)
+@if (Request.IsAuthenticated)
+{       <ul class="breadcrumb">
+          <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
+          @RenderSection("breadcrumbs", false)
+        </ul>
+}
         @RenderBody()
       </div>
       <footer class="row">

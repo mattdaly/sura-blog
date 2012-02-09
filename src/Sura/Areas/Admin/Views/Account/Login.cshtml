@@ -4,19 +4,29 @@
     ViewBag.Title = "Login";
 }
 <section class="span12">  
-@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-inline" }))  
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))  
 { <fieldset class="panel">
     <legend>Login</legend>
 
     @Html.ValidationSummary()
 
-    @Html.LabelFor(model => model.Username)
-    @Html.TextBoxFor(model => model.Username)
+    <div class="control-group">   
+      <label class="control-label" for="Username">Username</label>
+      <div class="controls">
+        @Html.TextBoxFor(model => model.Username)
+      </div>
+    </div>
         
-    @Html.LabelFor(model => model.Password)
-    @Html.PasswordFor(model => model.Password)
+    <div class="control-group">   
+      <label class="control-label" for="Password">Password</label>
+      <div class="controls">
+        @Html.PasswordFor(model => model.Password)
+      </div>
+    </div>
 
-    <input type="submit" value="Login" class="btn btn-primary" />   
+    <div class="form-actions">
+      <input type="submit" value="Login" class="btn btn-primary" />   
+    </div>
   </fieldset>
 }
 </section>

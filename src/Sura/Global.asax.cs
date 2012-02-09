@@ -57,8 +57,9 @@ namespace Sura
                     .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Id));
 
                 // settings
-                x.CreateMap<Settings, Sura.Areas.Admin.Views.Settings.Models.Edit>();
-
+                x.CreateMap<Settings, Sura.Areas.Admin.Views.Settings.Models.Edit>()
+                    .ForMember(dest => dest.EnableComments, opt => opt.MapFrom(src => src.EnableComments ? Status.Enabled : Status.Disabled))
+                    .ForMember(dest => dest.CommentsRequireApproval, opt => opt.MapFrom(src => src.CommentsRequireApproval ? Status.Enabled : Status.Disabled));
                 // users
                 x.CreateMap<User, Sura.Areas.Admin.Views.Users.Models.List>();
                 x.CreateMap<User, Sura.Areas.Admin.Views.Users.Models.Edit>();

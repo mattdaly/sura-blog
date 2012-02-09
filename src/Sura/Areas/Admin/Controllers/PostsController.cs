@@ -123,7 +123,7 @@ namespace Sura.Areas.Admin.Controllers
             post.Slug = Helper.ConvertToSlug(model.Title);
             post.Description = model.Description;
             post.Body = model.Body;
-            post.EnableComments = model.EnableComments == Status.Enabled ? true : false;
+            post.EnableComments = model.EnableComments == Status.Enabled;
             post.Tags = Helper.ConvertToTagList(model.Tags);
 
             if (model.Availability == Availability.Publish && (post.PublishedAt.HasValue == false || post.PublishedAt.Value > DateTimeOffset.UtcNow))

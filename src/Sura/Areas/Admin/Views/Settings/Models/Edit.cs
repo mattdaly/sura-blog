@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Sura.Areas.Admin.Infrastructure;
 
 namespace Sura.Areas.Admin.Views.Settings.Models
 {
@@ -7,7 +8,7 @@ namespace Sura.Areas.Admin.Views.Settings.Models
         public string Id { get; protected internal set; }
 
         public int KeepUsersOnlineFor { get; set; }
-        public bool EnableComments { get; set; }
-        public bool CommentsRequireApproval { get; set; } 
+        public Status EnableComments { get; set; }
+        public Status CommentsRequireApproval { get; set; } 
     }
 }

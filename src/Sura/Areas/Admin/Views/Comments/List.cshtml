@@ -6,10 +6,7 @@
 }
 @section breadcrumbs
 {
-<ul class="breadcrumb">
-  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
-  <li class="active">@Html.ActionLink("Comments", "List", "Comments")</li>
-</ul>
+<li class="active">@Html.ActionLink("Comments", "List", "Comments")</li>
 }
 <section class="span12">
   <h1>Comments</h1>
@@ -55,7 +52,7 @@
             <tbody> @foreach (var comment in Model.Where(x => x.Approved == false).OrderBy(x => x.WrittenAt).OrderBy(x => x.PostPublishedAt))
                     {
                  <tr>
-                    <td>@Html.ActionLink(@comment.PostTitle, "Post", "Blog", new { slug = @comment.PostSlug }, null)</td>
+                    <td>@Html.RouteLink(@comment.PostTitle, "Blog_Post", new { slug = @comment.PostSlug }, null)</td>
                     <td>@comment.PostPublishedAt.ToString("dd/MM/yy HH:mm")</td>
                     @if (string.IsNullOrWhiteSpace(comment.Url) == false)
                     {
