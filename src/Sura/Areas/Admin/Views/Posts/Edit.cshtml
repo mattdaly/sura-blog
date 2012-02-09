@@ -44,7 +44,14 @@
         </script>
       }
 }
-
+@section breadcrumbs
+{
+<ul class="breadcrumb">
+  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
+  <li>@Html.ActionLink("Posts", "List", "Posts") <span class="divider">/</span></li>
+  <li class="active">@Html.ActionLink(Model.Title, "Edit", "Posts", new { slug = Model.Slug}, null)</li>
+</ul>
+}
 <section class="span12">
 <h1>Edit - '@Model.Title'</h1>
 

@@ -3,6 +3,13 @@
 @{
     ViewBag.Title = "Users";
 }
+@section breadcrumbs
+{
+<ul class="breadcrumb">
+  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
+  <li class="active">@Html.ActionLink("Users", "List", "Users")</li>
+</ul>
+}
 <section class="span12">
   <h1>New User</h1>
 

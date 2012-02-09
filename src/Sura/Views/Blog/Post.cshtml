@@ -4,7 +4,7 @@
     ViewBag.Description = Model.Description;
     Model.Comment.PostId = Model.Id;
 }
-if (ViewBag.Posted)
+@if (ViewBag.Posted)
 {
 <div class="alert alert-success">
   <a data-dismiss="alert" class="close">&times;</a>

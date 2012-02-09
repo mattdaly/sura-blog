@@ -3,39 +3,70 @@
 @{
     ViewBag.Title = "Edit Account";
 }
+@section breadcrumbs
+{
+<ul class="breadcrumb">
+  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
+  <li class="active">@Html.ActionLink("Account", "Edit", "Account")</li>
+</ul>
+}
 <section class="span12">
   <h1>Account</h1>
-@using (Html.BeginForm("Update", "Account", FormMethod.Post, new { @class = "nice", autocomplete = "off" }))
+@using (Html.BeginForm("Update", "Account", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
 {
-    @Html.ValidationSummary() 
+    @Html.ValidationSummary()
+    @Html.HiddenFor(model => model.Id)
 
-    <fieldset>
-        <h5>Personal Information</h5>
-        @Html.HiddenFor(model => model.Id)
+   <fieldset class="panel">
+     <legend>Personal Information</legend>
 
-        @Html.LabelFor(model => model.Firstname)
-        @Html.TextBoxFor(model => model.Firstname, new { @class = "input-text" })
+     <div class="control-group">   
+       <label class="control-label" for="Firstname">Firstname</label>
+       <div class="controls">
+         @Html.TextBoxFor(model => model.Firstname)
+       </div>
+     </div> 
 
-        @Html.LabelFor(model => model.Surname)
-        @Html.TextBoxFor(model => model.Surname, new { @class = "input-text" })
+     <div class="control-group">   
+       <label class="control-label" for="Surname">Surname</label>
+       <div class="controls">
+         @Html.TextBoxFor(model => model.Surname)
+       </div>
+     </div> 
 
-        @Html.LabelFor(model => model.Nickname)
-        @Html.TextBoxFor(model => model.Nickname, new { @class = "input-text" })
-    </fieldset>    
+     <div class="control-group">   
+       <label class="control-label" for="Nickname">Nickname</label>
+       <div class="controls">
+         @Html.TextBoxFor(model => model.Nickname)
+       </div>
+     </div> 
+   </fieldset>    
     
-    <fieldset>
-        <h5>Change Password</h5>
+   <fieldset class="panel">
+     <legend>Change Password</legend>
                 
-        @Html.LabelFor(model => model.Password)
-        @Html.TextBoxFor(model => model.Password, new { @class = "input-text" })
+     <div class="control-group">   
+       <label class="control-label" for="Password">Password</label>
+       <div class="controls">
+         @Html.TextBoxFor(model => model.Password)
+       </div>
+     </div> 
 
-        @Html.LabelFor(model => model.NewPassword)
-        @Html.TextBoxFor(model => model.NewPassword, new { @class = "input-text" })
+     <div class="control-group">   
+       <label class="control-label" for="NewPassword">NewPassword</label>
+       <div class="controls">
+         @Html.TextBoxFor(model => model.NewPassword)
+       </div>
+     </div> 
 
-        @Html.LabelFor(model => model.NewPasswordRetype)
-        @Html.TextBoxFor(model => model.NewPasswordRetype, new { @class = "input-text" })
+     <div class="control-group">   
+       <label class="control-label" for="NewPasswordRetype">NewPasswordRetype</label>
+       <div class="controls">
+         @Html.TextBoxFor(model => model.NewPasswordRetype)
+       </div>
+     </div>
     </fieldset>  
     
-    <input type="submit" value="Update Account" class="nice radius blue button" />
+    <input type="submit" value="Update Account" class="btn btn-primary" />
 }
 </section>

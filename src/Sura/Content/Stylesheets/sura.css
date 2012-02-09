@@ -197,12 +197,13 @@ textarea.body
     width: 98%;
 }
 
-div.validation-summary-errors li
+div.validation-summary-errors ul 
 {
-    padding: 6px 7px; font-weight: bold; font-size: 13px; background: #eee; border: 1px solid rgba(0,0,0,0.1); margin-bottom: 12px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; text-shadow: 0 1px rgba(255,255,255,0.9); 
-	background-color: #c00000; color: #fff; text-shadow: 0 -1px rgba(0,0,0,0.3);
+    list-style-type: none;
+    margin: 0;
 }
 
+div.validation-summary-errors li{padding:8px 35px 8px 14px;margin-bottom:18px;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background-color:#f2dede;border-color:#eed3d7;color:#b94a48;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
 
 .help-inline.required 
 {

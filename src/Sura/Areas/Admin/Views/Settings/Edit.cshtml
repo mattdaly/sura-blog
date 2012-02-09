@@ -2,7 +2,13 @@
 @{
     ViewBag.Title = "Edit Blog Settings";
 }
-
+@section breadcrumbs
+{
+<ul class="breadcrumb">
+  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
+  <li class="active">@Html.ActionLink("Settings", "Edit", "Settings")</li>
+</ul>
+}
 <section class="span12 columns">
   <h1>Edit Blog Settings</h1>
 

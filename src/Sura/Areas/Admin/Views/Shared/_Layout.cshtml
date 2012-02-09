@@ -15,32 +15,38 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="row">
-        <p><span>@Html.RouteLink("Sura", "Blog")</span> Administration</p>
-      </header>
+    <header class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          @Html.RouteLink("Sura", "Blog", null, new { @class = "brand"})
 @if (Request.IsAuthenticated)
-{     <nav class="row">
-        <ul class="nav span8">
-          <li class="nav-dashboard">@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
-          <li class="nav-posts-new">@Html.ActionLink("New Post", "Create", "Posts")</li>
-          <li class="nav-posts dropdown">@Html.ActionLink("Posts", "List", "Posts")</li>
-          <li class="nav-comments">@Html.ActionLink("Comments", "List", "Comments")</li>
-          <li class="nav-users">@Html.ActionLink("Users", "List", "Users")</li>
-          <li class="nav-settings">@Html.ActionLink("Settings", "Edit", "Settings")</li>
-          <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-        </ul>
-        <span class="span2 offset2">@Html.User()</span>
-      </nav>
-}
+{         <ul class="nav">
+            <li class="nav-dashboard">@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+            <li class="nav-posts-new">@Html.ActionLink("New Post", "Create", "Posts")</li>
+            <li class="nav-posts">@Html.ActionLink("Posts", "List", "Posts")</li>
+            <li class="nav-comments">@Html.ActionLink("Comments", "List", "Comments")</li>
+            <li class="nav-users">@Html.ActionLink("Users", "List", "Users")</li>
+            <li class="nav-settings">@Html.ActionLink("Settings", "Edit", "Settings")</li>
+            <li class="nav-logout">@Html.ActionLink("Logout", "Logout", "Account")</li>
+          </ul>  
+          <ul class="nav pull-right">
+            <li class="nav-user">@Html.User()</li>
+          </ul>
+} 
+        </div>
+      </div>
+    </header>
+
+    <div class="container">       
       <div class="row main">
+        @RenderSection("breadcrumbs", false)
         @RenderBody()
       </div>
       <footer class="row">
       </footer>
     </div>
 
-    <script src="@Url.Content("~/Content/Javascripts/jquery.min.js")"> </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"> </script>
     <script src="@Url.Content("~/Content/Javascripts/bootstrap.min.js")"> </script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"> </script>
     <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"> </script>

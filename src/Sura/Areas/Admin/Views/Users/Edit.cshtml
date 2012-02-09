@@ -3,6 +3,14 @@
 @{
     ViewBag.Title = "Edit User";
 }
+@section breadcrumbs
+{
+<ul class="breadcrumb">
+  <li>@Html.ActionLink("Dashboard", "Index", "Dashboard") <span class="divider">/</span></li>
+  <li>@Html.ActionLink("Users", "List", "Users") <span class="divider">/</span></li>
+  <li class="active">@Html.ActionLink(Model.Id, "Edit", "Users", new { username = Model.Id }, null)</li>
+</ul>
+}
 
 <section class="span12">
   <h1>Edit - '@Model.Id'</h1>
