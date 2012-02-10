@@ -49,6 +49,7 @@ header .container .nav-user a
 {
     border-top: 1px solid #ddd;
     margin-bottom: 1.65em;
+    margin-top: 0.8em;
 }
 
 .container > div.row
@@ -92,6 +93,7 @@ fieldset.panel legend
 
 .sub-buttons 
 {
+    margin-bottom: 1em;
     text-align: right;
 }
 

@@ -1,7 +1,5 @@
 ﻿@using Sura.Areas.Admin.Helpers
-@using Sura.Areas.Admin.Infrastructure
-@using Sura.Areas.Admin.Views.Posts.Models
-@model Edit
+@model Sura.Areas.Admin.Views.Posts.Models.Edit
 @{
     ViewBag.Title = "Edit '" + Model.Title + "'";
 }
@@ -11,38 +9,8 @@
 }
 @section javascripts 
 {
-    <script src="@Url.Content("~/Content/Javascripts/Sura/sura-admin-posts.min.js")"></script>
-    @{
-        <script type="text/javascript">
-            $(document).ready(function () {         
-                $('#Tags').tagInput();
-                
-                var scheduler = $('span#schedule-datetimepicker').hide();
-                $('#ScheduleFor').datetimepicker({
-                    showOn: 'button',
-                    buttonImage: '@Url.Content("~/Content/Images/Sura/scheduler/calendar.gif")',
-                    buttonImageOnly: true,
-                    dateFormat: 'dd/mm/yy',
-                    minDate: new Date()
-                });
-                
-                @if (Model.Availability == Availability.Scheduled)
-                {
-                    @:scheduler.show();
-                }                
-
-                $('#Availability').change(function () {
-                    if ($(this).val() == '@Availability.Scheduled') {
-                        scheduler.show();
-                        $('.ui-datepicker-trigger').click();
-                    }
-                    else {
-                        scheduler.hide();
-                    }
-                });
-            });
-        </script>
-      }
+    <script src="@Url.Content("~/Content/Javascripts/Sura/jquery-ui-1.8.17.custom.min.js")"></script>
+    <script src="@Url.Content("~/Content/Javascripts/Sura/sura-admin-posts.js")"></script>
 }
 @section breadcrumbs
 {
@@ -111,10 +79,13 @@
       <label class="control-label" for="Availability">Availability</label>
       <div class="controls">
         @Html.EnumDropDownListFor(model => model.Availability, new { @class = "span2" })
-        <span id="schedule-datetimepicker">
-          <label for="ScheduleFor">Select a time and date:</label>
-          <input id="ScheduleFor" name="ScheduleFor" type="text" value="" disabled />
-        </span>
+        <div id="schedule-datetimepicker">
+          <p class="help-inline">This post is currently scheduled for</p>
+          <input id="ScheduleFor" name="ScheduleFor" type="text" value="@if(Model.ScheduleFor.HasValue)
+                                                                        {
+                                                                            Model.ScheduleFor.Value.ToString("dd/MM/yyyy mm:hh");
+                                                                        }" readonly="readonly" />
+        </div>
       </div>
     </div>
 

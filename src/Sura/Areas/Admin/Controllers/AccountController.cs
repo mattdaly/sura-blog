@@ -75,16 +75,16 @@ namespace Sura.Areas.Admin.Controllers
                             userdata = user.Firstname;
 
                         var settings = Settings.Load();
-
+                        var expiry = settings.KeepUsersOnlineFor > 0 ? DateTime.Now.AddMinutes(settings.KeepUsersOnlineFor) : DateTime.Now.AddYears(10);
                         var encryptedTicket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(
                                                                               1,
                                                                               user.Id,
                                                                               DateTime.Now,
-                                                                              DateTime.Now.AddMinutes(settings.KeepUsersOnlineFor),
+                                                                              expiry,
                                                                               false,
                                                                               userdata));
 
-                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket) { Expires = expiry };
 
                         System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
 

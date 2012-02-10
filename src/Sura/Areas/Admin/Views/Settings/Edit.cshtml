@@ -7,7 +7,7 @@
 <li class="active"><span class="divider">/</span> @Html.ActionLink("Settings", "Edit", "Settings")</li>
 }
 <section class="span12 columns">
-  <h1>Edit Blog Settings</h1>
+  <h1>Edit Settings</h1>
 
 @if (@ViewBag.Success == true)
 {
@@ -32,6 +32,7 @@
           @Html.TextBoxFor(model => model.KeepUsersOnlineFor, new { @class = "mins" })
           <span class="add-on">minutes</span>
         </div>
+        <p class="help-block">To have user sessions never expire enter 0.</p>
       </div>
     </div>
   </fieldset>    
